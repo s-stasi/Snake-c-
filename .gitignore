@@ -43,8 +43,8 @@
 *.zip
 
 ## Release and Debug folders
-Debug\
-Release\
+Debug/
+Release/
 
 ## LOG Files
 *.log
