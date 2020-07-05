@@ -33,19 +33,24 @@
 *.out
 *.app
 
-## VS Files ##
+## VS Files
 *.vcxproj
 *.vcxproj.filters
 *.vcxproj.user
+*.lastbuildstate
 
-## zip Files ##
+## zip Files
 *.zip
 
-## Release and Debug folders ##
+## Release and Debug folders
 Debug\
 Release\
 
-## LOG Files ##
+## LOG Files
 *.log
 *.tlog
-*.lastbuildstate
+
+## I don't know
+*.idb
+*.pdb
+*.res
