@@ -44,3 +44,7 @@
 ## Release and Debug folders ##
 Debug\
 Release\
+
+## LOG Files ##
+*.tlog
+*.lastbuildstate
