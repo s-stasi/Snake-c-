@@ -4,6 +4,7 @@
 #include <time.h>
 #include <iostream>
 #include <string>
+#include <fstream>
 #include "Menu.h"
 #define _(STRING) gettext(STRING)
 using namespace sf;
@@ -77,8 +78,28 @@ void move(){
 
 int main()
 {
+	char* memory;
+
+	std::ifstream myfile("icon.png", std::ios::binary | std::ios::ate);
+
+	std::ifstream::pos_type size;
+
+	size = myfile.tellg();
+
+	memory = new char[size];
+
+	myfile.seekg(0, std::ios::beg);
+	myfile.read(memory, size);
+	myfile.close();
+
 	sf::Image icon;
-	icon.loadFromFile("icon.ico");
+	if (!icon.loadFromMemory(memory, size))
+	{
+		std::cout << "failed to load image" << std::endl;
+	}
+
+
+
     srand(time(0));
 
     // Creazione fnestra
