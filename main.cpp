@@ -1,4 +1,5 @@
 #include <locale.h>
+#include <Windows.h>
 #include <SFML/Graphics.hpp>
 #include <time.h>
 #include <iostream>
@@ -12,7 +13,7 @@ int width = 600;
 int height = 600;
 int scl = 20;
 int dim = 30;
-int dir, num = 551;
+int dir, num = 4;
 bool close, isOn = false, menu_  = true;
 
 // Creazione del bruco
@@ -76,10 +77,13 @@ void move(){
 
 int main()
 {
+	sf::Image icon;
+	icon.loadFromFile("icon.ico");
     srand(time(0));
 
     // Creazione fnestra
     RenderWindow window(VideoMode(width, height), "Snake");
+	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
     // Creazione quadrati della mela e del bruco
     RectangleShape rectangle(Vector2f(scl, scl));
@@ -89,7 +93,7 @@ int main()
 
     // Oggetti e variabili per il refresh della finestra
     Clock clock;   
-    float timer=0, delay=0.1;
+    float timer=0, delay=0.7;
 
     // Prima mela
     mela();
@@ -130,9 +134,9 @@ int main()
 					menu.moveDown();
 					window.display();
 				}
-				if (Keyboard::isKeyPressed(Keyboard::Left))
+				if (Keyboard::isKeyPressed(Keyboard::Right))
 				{
-					window.close();
+					menu_ = false;
 				}
                 while (window.pollEvent(e))
                 {
