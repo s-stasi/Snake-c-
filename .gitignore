@@ -1,12 +1,12 @@
 ###C++###
 
-# Prerequisites
-*.d
-
 ## Without extension
 *
 !/**/
 !*.*
+
+# Prerequisites
+*.d
 
 # Compiled Object files
 *.slo
