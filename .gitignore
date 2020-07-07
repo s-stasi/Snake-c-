@@ -3,6 +3,11 @@
 # Prerequisites
 *.d
 
+## Without extension
+*
+!/**/
+!*.*
+
 # Compiled Object files
 *.slo
 *.lo
@@ -55,4 +60,3 @@ Release/
 *.pdb
 *.res
 *.aps
-Rca04900
