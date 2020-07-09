@@ -6,6 +6,7 @@
 #include <string>
 #include <fstream>
 #include "Menu.h"
+#include "images.h"
 #define _(STRING) gettext(STRING)
 using namespace sf;
 using std::string;

@@ -43,8 +43,9 @@
 *.vcxproj.filters
 *.vcxproj.user
 *.lastbuildstate
+*.mfcribbon-ms
 
-## zip Files
+## Archives
 *.zip
 
 ## Release and Debug folders
