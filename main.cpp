@@ -79,7 +79,7 @@ void move(){
 
 int main()
 {
-	char* memory;
+	/*char* memory;
 
 	std::ifstream myfile("icon.png", std::ios::binary | std::ios::ate);
 
@@ -91,10 +91,10 @@ int main()
 
 	myfile.seekg(0, std::ios::beg);
 	myfile.read(memory, size);
-	myfile.close();
+	myfile.close();*/
 
 	sf::Image icon;
-	if (!icon.loadFromMemory(memory, size))
+	if (!icon.loadFromFile("icon.bmp"))
 	{
 		std::cout << "failed to load image" << std::endl;
 	}
