@@ -79,32 +79,18 @@ void move(){
 
 int main()
 {
-	/*char* memory;
-
-	std::ifstream myfile("icon.png", std::ios::binary | std::ios::ate);
-
-	std::ifstream::pos_type size;
-
-	size = myfile.tellg();
-
-	memory = new char[size];
-
-	myfile.seekg(0, std::ios::beg);
-	myfile.read(memory, size);
-	myfile.close();*/
-
-	sf::Image icon;
-	if (!icon.loadFromFile("icon.bmp"))
-	{
-		std::cout << "failed to load image" << std::endl;
-	}
-
-
 
     srand(time(0));
 
     // Creazione fnestra
     RenderWindow window(VideoMode(width, height), "Snake");
+
+	// Icona applicazione
+	Image icon;
+	if (!icon.loadFromFile("icon.bmp"))
+	{
+		std::cout << "failed to load image" << std::endl;
+	}
 	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
     // Creazione quadrati della mela e del bruco
