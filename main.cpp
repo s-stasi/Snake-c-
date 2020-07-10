@@ -7,13 +7,14 @@
 #include <fstream>
 #include "Menu.h"
 #include "images.h"
+//#include "Apple.h"
 #define _(STRING) gettext(STRING)
 using namespace sf;
 using std::string;
 
 int width = 600;
 int height = 600;
-int scl = 20;
+float scl = 20.0;
 int dim = 30;
 int dir, num = 4;
 bool close, isOn = false, menu_  = true;
@@ -59,9 +60,9 @@ void move(){
         num++;
 		mela();
     }
-
+	isOn = true;
     // Controllo se la mela è sopra al bruco
-	while (isOn == true);
+	do
     {
 		std::cout << "1" << std::endl;
 		isOn = false;
@@ -69,12 +70,13 @@ void move(){
         {
             if (s[i].x==a.x && s[i].y==a.y)
             {
-                mela();
+				a.x = rand() % dim;
+				a.y = rand() % dim;
 				std::cout << "2" << std::endl;
 				isOn = true;
             }
         }
-    }
+    } while (isOn == true);
 }
 
 int main()
@@ -96,15 +98,18 @@ int main()
     // Creazione quadrati della mela e del bruco
     RectangleShape rectangle(Vector2f(scl, scl));
     rectangle.setFillColor(Color::Green);
-    RectangleShape rectapple(Vector2f(scl, scl));
-    rectapple.setFillColor(Color::Red);
+	sf::RectangleShape rectapple(sf::Vector2f(20, 20));
+	rectapple.setFillColor(sf::Color::Red);
+    
 
-    // Oggetti e variabili per il refresh della finestra
+    // Oggetti e variabili per il framerate
     Clock clock;   
-    float timer=0, delay=0.7;
+    float timer=0, delay=0.2f;
 
-    // Prima mela
-    mela();
+    // Oggetto mela
+	//Apple apple;
+	//apple.newPos();
+	//apple.draw(window);
 
     // loop del gioco
     while (window.isOpen())
