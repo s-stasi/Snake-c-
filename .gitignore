@@ -44,6 +44,7 @@
 *.vcxproj.user
 *.lastbuildstate
 *.mfcribbon-ms
+*.lby~
 
 ## Archives
 *.zip
