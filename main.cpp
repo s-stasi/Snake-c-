@@ -7,7 +7,9 @@
 #include <fstream>
 #include "Menu.h"
 #include "images.h"
+#include "Version.h"
 #define _(STRING) gettext(STRING)
+#define VERSION "0.0.1"
 using namespace sf;
 using std::string;
 
@@ -81,7 +83,6 @@ void move(){
 
 int main()
 {
-
     srand(time(0));
 
     // Creazione fnestra
@@ -100,12 +101,15 @@ int main()
     rectangle.setFillColor(Color::Green);
 	sf::RectangleShape rectapple(sf::Vector2f(20, 20));
 	rectapple.setFillColor(sf::Color::Red);
-    
+
+	// Versione
+	Version version(VERSION, width, height);
 
     // Oggetti e variabili per il framerate
     Clock clock;   
     float timer=0, delay=0.2f;
 
+	// Menu
 	Menu menu(width, height);
 
     // loop del gioco
@@ -180,6 +184,7 @@ int main()
 			rectapple.setPosition(a.x*scl, a.y*scl);
 			window.draw(rectapple);
 		}
+		version.draw(window);
         window.display();
     }
     return 0;
