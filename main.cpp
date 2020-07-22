@@ -138,6 +138,19 @@ int main()
 						std::cout << "pressed Down" << std::endl;
 						menu.moveDown();
 						break;
+					case Keyboard::Return:
+						switch (menu.getPressedItem())
+						{
+						case 0:
+							gameStatus = 1;
+							break;
+						case 1:
+							std::cout << "settings" << std::endl;
+							break;
+						case 2:
+							window.close();
+						}
+						break;
 					}
 					break;
 				}
