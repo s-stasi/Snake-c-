@@ -39,7 +39,7 @@ void move(){
     // Controllo se il bruco è fuori dal campo di gioco
 	if(s[0].x==dim || s[0].y==dim || s[0].x==0-1 || s[0].y==0-1) 
     {
-        close = true;
+		gameStatus = 0;
     }
     for (int i = num; i > 0; i--)
     {
@@ -161,7 +161,6 @@ int main()
 
 		else if (gameStatus == 1)
 		{
-			menu.~Menu();
 			if (Keyboard::isKeyPressed(Keyboard::Left) && dir != 2) dir = 1;
 			if (Keyboard::isKeyPressed(Keyboard::Right) && dir != 1) dir = 2;
 			if (Keyboard::isKeyPressed(Keyboard::Up) && dir != 0) dir = 3;
@@ -185,4 +184,3 @@ int main()
     }
     return 0;
 }
-
