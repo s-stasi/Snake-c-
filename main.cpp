@@ -16,7 +16,8 @@ int height = 600;
 float scl = 20.0;
 int dim = 30;
 int dir, num = 4;
-bool close, isOn = false, menu_  = true;
+int gameStatus = 0;
+bool close, isOn = false;
 
 // Creazione del bruco
 struct Snake 
@@ -105,6 +106,8 @@ int main()
     Clock clock;   
     float timer=0, delay=0.2f;
 
+	Menu menu(width, height);
+
     // loop del gioco
     while (window.isOpen())
     {
@@ -114,68 +117,57 @@ int main()
         timer+=time;
 
         Event e;
-        while (window.pollEvent(e))
-        {
-            if (e.type == Event::Closed || close == true)
-            {
-                window.close();
-            }
-        }
-        if (menu_)
+
+        if (gameStatus == 0)
 		{
-
-			Menu menu(window.getSize().x, window.getSize().y);
+			while (window.pollEvent(e))
+			{
+				switch (e.type)
+				{
+				case Event::Closed:
+					window.close();
+					break;
+				case Event::KeyReleased:
+					switch (e.key.code)
+					{
+					case Keyboard::Up:
+						std::cout << "pressed Up" << std::endl;
+						menu.moveUp();
+						break;
+					case Keyboard::Down:
+						std::cout << "pressed Down" << std::endl;
+						menu.moveDown();
+						break;
+					}
+					break;
+				}
+			}
+			window.clear(Color::Black);
 			menu.draw(window);
-			window.display();
-
-            while (menu_)
-            {
-				window.display();
-				if (Keyboard::isKeyPressed(Keyboard::Up))
-				{
-					menu.moveUp();
-					window.display();
-				}
-				if (Keyboard::isKeyPressed(Keyboard::Down))
-				{
-					menu.moveDown();
-					window.display();
-				}
-				if (Keyboard::isKeyPressed(Keyboard::Right))
-				{
-					menu_ = false;
-				}
-                while (window.pollEvent(e))
-                {
-                    if (e.type == Event::Closed || close == true)
-                    {
-                        window.close();
-                    }
-                }
-            }
 		}
-        if (Keyboard::isKeyPressed(Keyboard::Left) && dir != 2) dir=1;   
-        if (Keyboard::isKeyPressed(Keyboard::Right) && dir != 1) dir=2;    
-        if (Keyboard::isKeyPressed(Keyboard::Up) && dir != 0) dir=3;
-        if (Keyboard::isKeyPressed(Keyboard::Down) && dir != 3) dir=0;
 
-        window.display();
-        if (timer>delay)
-        {
-            timer=0;
-            move();
-        }
-        window.clear(Color::Black);
+		else if (gameStatus == 1)
+		{
+			menu.~Menu();
+			if (Keyboard::isKeyPressed(Keyboard::Left) && dir != 2) dir = 1;
+			if (Keyboard::isKeyPressed(Keyboard::Right) && dir != 1) dir = 2;
+			if (Keyboard::isKeyPressed(Keyboard::Up) && dir != 0) dir = 3;
+			if (Keyboard::isKeyPressed(Keyboard::Down) && dir != 3) dir = 0;
+			if (timer>delay)
+			{
+				timer = 0;
+				move();
+			}
+			window.clear(Color::Black);
 
-        for (int i=0;i<num;i++)
-        { 
-            rectangle.setPosition(s[i].x*scl, s[i].y*scl);
-            window.draw(rectangle);
-        }
-   
-        rectapple.setPosition(a.x*scl, a.y*scl);
-        window.draw(rectapple);    
-
+			for (int i = 0; i<num; i++)
+			{
+				rectangle.setPosition(s[i].x*scl, s[i].y*scl);
+				window.draw(rectangle);
+			}
+			rectapple.setPosition(a.x*scl, a.y*scl);
+			window.draw(rectapple);
+		}
         window.display();
     }
     return 0;
