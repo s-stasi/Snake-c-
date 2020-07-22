@@ -11,8 +11,8 @@
 using namespace sf;
 using std::string;
 
-int width = 600;
-int height = 600;
+float width = 600;
+float height = 600;
 float scl = 20.0;
 int dim = 30;
 int dir, num = 4;
@@ -131,11 +131,11 @@ int main()
 					switch (e.key.code)
 					{
 					case Keyboard::Up:
-						std::cout << "pressed Up" << std::endl;
+						std::cout << "pressed up arrow" << std::endl;
 						menu.moveUp();
 						break;
 					case Keyboard::Down:
-						std::cout << "pressed Down" << std::endl;
+						std::cout << "pressed down arrow" << std::endl;
 						menu.moveDown();
 						break;
 					case Keyboard::Return:
@@ -145,7 +145,7 @@ int main()
 							gameStatus = 1;
 							break;
 						case 1:
-							std::cout << "settings" << std::endl;
+							std::cout << "The settings section is in development..." << std::endl;
 							break;
 						case 2:
 							window.close();

@@ -41,7 +41,6 @@ void Menu::draw(sf::RenderWindow &window)
 
 void Menu::moveUp()
 {
-	std::cout << "mu" << std::endl;
 	if (selectedItemIndex - 1 >= 0)
 	{
 		menu[selectedItemIndex].setFillColor(sf::Color::White);
@@ -53,7 +52,6 @@ void Menu::moveUp()
 
 void Menu::moveDown()
 {
-	std::cout << "md" << std::endl;
 	if (selectedItemIndex + 1 < MAX_ITEMS)
 	{
 		std::cout << selectedItemIndex << std::endl;
