@@ -24,5 +24,4 @@ Version::~Version()
 void Version::draw(sf::RenderWindow &window)
 {
 	window.draw(version);
-	std::cout << "disegnato" << std::endl;
 }

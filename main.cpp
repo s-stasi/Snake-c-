@@ -6,6 +6,7 @@
 #include <string>
 #include <fstream>
 #include "Menu.h"
+#include "Apple.h"
 #include "images.h"
 #include "Version.h"
 #define _(STRING) gettext(STRING)
@@ -13,8 +14,8 @@
 using namespace sf;
 using std::string;
 
-float width = 600;
-float height = 600;
+int width = 600;
+int height = 600;
 float scl = 20.0;
 int dim = 30;
 int dir, num = 4;
@@ -26,18 +27,18 @@ struct Snake
 { int x,y;}  s[900];
 
 // Creazione della mela
-struct Apple
-{ int x,y;}  a;
+//struct Apple
+//{ int x,y;}  a;
 
 // Funzione spawn mela
-void mela()
-{
-    a.x=rand()%dim;
-    a.y=rand()%dim;
-}
+//void mela()
+//{
+//	a.x = rand() % dim;
+//	a.y = rand() % dim;
+//}
 
 // Funzione gestione dei movimenti del bruco e posizionamento della mela
-void move(){
+void move(Apple apple){
     // Controllo se il bruco è fuori dal campo di gioco
 	if(s[0].x==dim || s[0].y==dim || s[0].x==0-1 || s[0].y==0-1) 
     {
@@ -48,6 +49,8 @@ void move(){
         // Spostamento del bruco
         s[i].x=s[i-1].x;
         s[i].y=s[i-1].y;
+		//std::cout << "mela: " << apple.getX() << ", " << apple.getY() << std::endl;
+		//std::cout << "bruco: " << s[0].x << ", " << s[0].y << std::endl;
     }
     
     if (dir==0){s[0].y+=1;}
@@ -57,24 +60,24 @@ void move(){
 
     // Controllo se il bruco ha mangiato la mela e
     // creazione della nuova mela
-    if (s[0].x==a.x && s[0].y==a.y)
+    if (s[0].x==apple.getX() && s[0].y==apple.getY())
     {
+		//std::cout << apple.getX() << " " << apple.getY() << std::endl;
         num++;
-		mela();
+		apple.changePos();
+		apple.draw(window);
     }
+
 	isOn = true;
     // Controllo se la mela è sopra al bruco
 	do
     {
-		std::cout << "1" << std::endl;
 		isOn = false;
         for (int i=0; i<num; i++)
         {
-            if (s[i].x==a.x && s[i].y==a.y)
+            if (s[i].x==apple.getX() && s[i].y==apple.getY())
             {
-				a.x = rand() % dim;
-				a.y = rand() % dim;
-				std::cout << "2" << std::endl;
+				apple.changePos();
 				isOn = true;
             }
         }
@@ -101,6 +104,9 @@ int main()
     rectangle.setFillColor(Color::Green);
 	sf::RectangleShape rectapple(sf::Vector2f(20, 20));
 	rectapple.setFillColor(sf::Color::Red);
+
+	Apple apple(rectapple, dim, scl);
+	apple.changePos();
 
 	// Versione
 	Version version(VERSION, width, height);
@@ -172,7 +178,7 @@ int main()
 			if (timer>delay)
 			{
 				timer = 0;
-				move();
+				move(apple);
 			}
 			window.clear(Color::Black);
 
@@ -181,8 +187,7 @@ int main()
 				rectangle.setPosition(s[i].x*scl, s[i].y*scl);
 				window.draw(rectangle);
 			}
-			rectapple.setPosition(a.x*scl, a.y*scl);
-			window.draw(rectapple);
+			apple.draw(window);
 		}
 		version.draw(window);
         window.display();
