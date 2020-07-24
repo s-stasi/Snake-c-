@@ -1,6 +1,6 @@
-#include "Menu.h"
+#include "MainMenu.h"
 
-Menu::Menu(float width, float height)
+MainMenu::MainMenu(float width, float height)
 {
 	if (font.loadFromFile("Font/arial.ttf"))
 	{
@@ -25,12 +25,12 @@ Menu::Menu(float width, float height)
 	selectedItemIndex = 0;
 }
 
-Menu::~Menu()
+MainMenu::~MainMenu()
 {
 }
 
 
-void Menu::draw(sf::RenderWindow &window)
+void MainMenu::draw(sf::RenderWindow &window)
 {
 	for (int i = 0; i < MAX_ITEMS; i++)
 	{
@@ -39,7 +39,7 @@ void Menu::draw(sf::RenderWindow &window)
 }
 
 
-void Menu::moveUp()
+void MainMenu::moveUp()
 {
 	if (selectedItemIndex - 1 >= 0)
 	{
@@ -50,7 +50,7 @@ void Menu::moveUp()
 }
 
 
-void Menu::moveDown()
+void MainMenu::moveDown()
 {
 	if (selectedItemIndex + 1 < MAX_ITEMS)
 	{
@@ -61,7 +61,7 @@ void Menu::moveDown()
 	}
 }
 
-int Menu::getPressedItem()
+int MainMenu::getPressedItem()
 {
 	return selectedItemIndex;
 }

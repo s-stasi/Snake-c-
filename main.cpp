@@ -5,7 +5,8 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "Menu.h"
+#include "MainMenu.h"
+#include "ModMenu.h"
 #include "Apple.h"
 #include "images.h"
 #include "Version.h"
@@ -18,9 +19,9 @@ int width = 600;
 int height = 600;
 float scl = 20.0;
 int dim = 30;
-int dir, num = 4;
+int dir, num = 1;
 int gameStatus = 0;
-bool close, isOn = false;
+int gameMode;bool close, isOn = false;
 
 // Creazione del bruco
 struct Snake 
@@ -38,10 +39,15 @@ struct Snake
 //}
 
 // Funzione gestione dei movimenti del bruco e posizionamento della mela
-void move(Apple apple){
+void move(Apple apple, RenderWindow &window, float &delay){
     // Controllo se il bruco è fuori dal campo di gioco
 	if(s[0].x==dim || s[0].y==dim || s[0].x==0-1 || s[0].y==0-1) 
     {
+		num = 1;
+		s[0].x = 0;
+		s[0].y = 0;
+		dir = 0;
+		delay = 0.15f;
 		gameStatus = 0;
     }
     for (int i = num; i > 0; i--)
@@ -64,6 +70,7 @@ void move(Apple apple){
     {
 		//std::cout << apple.getX() << " " << apple.getY() << std::endl;
         num++;
+		delay += 0.01f;
 		apple.changePos();
 		apple.draw(window);
     }
@@ -113,10 +120,13 @@ int main()
 
     // Oggetti e variabili per il framerate
     Clock clock;   
-    float timer=0, delay=0.2f;
+    float timer=0, delay=0.35f;
 
 	// Menu
-	Menu menu(width, height);
+	MainMenu menu(width, height);
+
+	// Menu modalità
+	ModMenu modMenu(width, height);
 
     // loop del gioco
     while (window.isOpen())
@@ -155,7 +165,7 @@ int main()
 							gameStatus = 1;
 							break;
 						case 1:
-							std::cout << "The settings section is in development..." << std::endl;
+							gameStatus = 2;
 							break;
 						case 2:
 							window.close();
@@ -178,7 +188,7 @@ int main()
 			if (timer>delay)
 			{
 				timer = 0;
-				move(apple);
+				move(apple, window, delay);
 			}
 			window.clear(Color::Black);
 
@@ -189,6 +199,53 @@ int main()
 			}
 			apple.draw(window);
 		}
+
+		else if (gameStatus == 2)
+		{
+			while (window.pollEvent(e))
+			{
+				switch (e.type)
+				{
+				case Event::Closed:
+					window.close();
+					break;
+				case Event::KeyReleased:
+					switch (e.key.code)
+					{
+					case Keyboard::Up:
+						std::cout << "pressed up arrow" << std::endl;
+						modMenu.moveUp();
+						break;
+					case Keyboard::Down:
+						std::cout << "pressed down arrow" << std::endl;
+						modMenu.moveDown();
+						break;
+					case Keyboard::Return:
+						switch (menu.getPressedItem())
+						{
+						case 0:
+							std::cout << "ciao" << std::endl;
+							gameMode = 0;
+							break;
+						case 1:
+							std::cout << "ciao" << std::endl;
+							gameMode = 1;
+							break;
+						case 2:
+							std::cout << "ciao" << std::endl;
+							gameStatus = 0;
+							std::cout << gameStatus << std::endl;
+							break;
+						}
+						break;
+					}
+					break;
+				}
+			}
+			window.clear(Color::Black);
+			modMenu.draw(window);
+		}
+
 		version.draw(window);
         window.display();
     }

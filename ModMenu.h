@@ -3,11 +3,11 @@
 #include <iostream>
 #define MAX_ITEMS 3
 
-class Menu
+class ModMenu
 {
 public:
-	Menu(float width, float height);
-	~Menu();
+	ModMenu(float width, float height);
+	~ModMenu();
 
 	void draw(sf::RenderWindow &window);
 	void moveUp();
