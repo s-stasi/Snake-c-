@@ -15,7 +15,7 @@ void Apple::changePos()
 	srand(time(NULL));
 	x = rand() % dim;
 	y = rand() % dim;
-	rect.setPosition(x * scl, y * scl);
+	rect.setPosition(x * scl_f, y * scl_f);
 	std::cout << "mela: " << x << ", " << y << std::endl;
 }
 

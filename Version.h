@@ -6,7 +6,7 @@
 class Version
 {
 public:
-	Version(std::string text, int width, int height);
+	Version(std::string text, float width_f, float height_f);
 	~Version();
 
 	void draw(sf::RenderWindow &window);

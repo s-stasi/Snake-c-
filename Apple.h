@@ -18,4 +18,5 @@ private:
 	int x, y;
 	int dim;
 	int scl;
+	float scl_f = 20.0f;
 };
