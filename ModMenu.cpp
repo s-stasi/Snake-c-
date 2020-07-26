@@ -59,10 +59,13 @@ void ModMenu::moveDown()
 		menu[selectedItemIndex].setFillColor(sf::Color::White);
 		selectedItemIndex++;
 		menu[selectedItemIndex].setFillColor(sf::Color::Red);
+
+		std::cout << "Selecteditemindex: " << selectedItemIndex << std::endl;
 	}
 }
 
 int ModMenu::getPressedItem()
 {
 	return selectedItemIndex;
+	std::cout << "Getpresseditem: " << selectedItemIndex << std::endl;
 }

@@ -17,26 +17,19 @@ using std::string;
 
 int width = 600;
 int height = 600;
+float width_f = 600.0f;
+float height_f = 600.0f;
 float scl = 20.0;
+int scl_i = 20;
 int dim = 30;
 int dir, num = 1;
 int gameStatus = 0;
-int gameMode;bool close, isOn = false;
+int gameMode;
+bool close, isOn = false;
 
 // Creazione del bruco
 struct Snake 
 { int x,y;}  s[900];
-
-// Creazione della mela
-//struct Apple
-//{ int x,y;}  a;
-
-// Funzione spawn mela
-//void mela()
-//{
-//	a.x = rand() % dim;
-//	a.y = rand() % dim;
-//}
 
 // Funzione gestione dei movimenti del bruco e posizionamento della mela
 void move(Apple apple, RenderWindow &window, float &delay){
@@ -66,11 +59,15 @@ void move(Apple apple, RenderWindow &window, float &delay){
 
     // Controllo se il bruco ha mangiato la mela e
     // creazione della nuova mela
-    if (s[0].x==apple.getX() && s[0].y==apple.getY())
-    {
+	if (s[0].x == apple.getX() && s[0].y == apple.getY())
+	{
 		//std::cout << apple.getX() << " " << apple.getY() << std::endl;
-        num++;
-		delay += 0.01f;
+		num++;
+		std::cout << "Gamemode; " << gameMode << std::endl;
+		if (gameMode == 1 && delay > 0.05)
+		{
+			delay -= 0.02f;
+		}
 		apple.changePos();
 		apple.draw(window);
     }
@@ -112,21 +109,21 @@ int main()
 	sf::RectangleShape rectapple(sf::Vector2f(20, 20));
 	rectapple.setFillColor(sf::Color::Red);
 
-	Apple apple(rectapple, dim, scl);
+	Apple apple(rectapple, dim, scl_i);
 	apple.changePos();
 
 	// Versione
-	Version version(VERSION, width, height);
+	Version version(VERSION, width_f, height_f);
 
     // Oggetti e variabili per il framerate
     Clock clock;   
     float timer=0, delay=0.35f;
 
 	// Menu
-	MainMenu menu(width, height);
+	MainMenu menu(width_f, height_f);
 
 	// Menu modalità
-	ModMenu modMenu(width, height);
+	ModMenu modMenu(width_f, height_f);
 
     // loop del gioco
     while (window.isOpen())
@@ -221,22 +218,25 @@ int main()
 						modMenu.moveDown();
 						break;
 					case Keyboard::Return:
-						switch (menu.getPressedItem())
+
+
+						switch (modMenu.getPressedItem())
 						{
 						case 0:
-							std::cout << "ciao" << std::endl;
+							std::cout << "normale" << std::endl;
 							gameMode = 0;
 							break;
 						case 1:
-							std::cout << "ciao" << std::endl;
+							std::cout << "veloce" << std::endl;
 							gameMode = 1;
 							break;
 						case 2:
-							std::cout << "ciao" << std::endl;
+							std::cout << "exit" << std::endl;
 							gameStatus = 0;
 							std::cout << gameStatus << std::endl;
 							break;
 						}
+						std::cout << "Item: " << modMenu.getPressedItem() << std::endl;
 						break;
 					}
 					break;
