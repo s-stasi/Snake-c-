@@ -47,6 +47,12 @@ void MainMenu::moveUp()
 		selectedItemIndex--;
 		menu[selectedItemIndex].setFillColor(sf::Color::Red);
 	}
+	else
+	{
+		menu[selectedItemIndex].setFillColor(sf::Color::White);
+		selectedItemIndex += MAX_ITEMS - 1;
+		menu[selectedItemIndex].setFillColor(sf::Color::Red);
+	}
 }
 
 
@@ -57,6 +63,12 @@ void MainMenu::moveDown()
 		std::cout << selectedItemIndex << std::endl;
 		menu[selectedItemIndex].setFillColor(sf::Color::White);
 		selectedItemIndex++;
+		menu[selectedItemIndex].setFillColor(sf::Color::Red);
+	}
+	else
+	{
+		menu[selectedItemIndex].setFillColor(sf::Color::White);
+		selectedItemIndex -= MAX_ITEMS - 1;
 		menu[selectedItemIndex].setFillColor(sf::Color::Red);
 	}
 }

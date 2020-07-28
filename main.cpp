@@ -135,6 +135,7 @@ int main()
 
         Event e;
 
+
         if (gameStatus == 0)
 		{
 			while (window.pollEvent(e))

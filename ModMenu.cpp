@@ -48,6 +48,12 @@ void ModMenu::moveUp()
 		selectedItemIndex--;
 		menu[selectedItemIndex].setFillColor(sf::Color::Red);
 	}
+	else
+	{
+		menu[selectedItemIndex].setFillColor(sf::Color::White);
+		selectedItemIndex += MAX_ITEMS -1;
+		menu[selectedItemIndex].setFillColor(sf::Color::Red);
+	}
 }
 
 
@@ -59,8 +65,12 @@ void ModMenu::moveDown()
 		menu[selectedItemIndex].setFillColor(sf::Color::White);
 		selectedItemIndex++;
 		menu[selectedItemIndex].setFillColor(sf::Color::Red);
-
-		std::cout << "Selecteditemindex: " << selectedItemIndex << std::endl;
+	}
+	else
+	{
+		menu[selectedItemIndex].setFillColor(sf::Color::White);
+		selectedItemIndex -= MAX_ITEMS - 1;
+		menu[selectedItemIndex].setFillColor(sf::Color::Red);
 	}
 }
 
