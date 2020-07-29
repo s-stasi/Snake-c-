@@ -1,10 +1,4 @@
-#include <locale.h>
-#include <Windows.h>
-#include <SFML/Graphics.hpp>
-#include <time.h>
-#include <iostream>
-#include <string>
-#include <fstream>
+#include "dependencies.h"
 #include "MainMenu.h"
 #include "ModMenu.h"
 #include "Apple.h"
@@ -66,7 +60,7 @@ void move(Apple &apple, float &delay){
 		//std::cout << apple.getX() << " " << apple.getY() << std::endl;
 		num++;
 		std::cout << "Gamemode: " << gameMode << std::endl;
-		if (gameMode == 1 && delay > 0.05)
+		if (gameMode == 1 && delay > 0.25f)
 		{
 			delay -= 0.02f;
 		}
@@ -124,7 +118,7 @@ int main()
 
     // Oggetti e variabili per il framerate
     Clock clock;   
-    float timer=0, delay=0.35f;
+    float timer=0, delay=0.15f;
 
 	// Menu
 	MainMenu menu(width_f, height_f);
