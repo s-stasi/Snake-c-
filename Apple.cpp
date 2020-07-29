@@ -1,6 +1,6 @@
 #include "Apple.h"
 
-Apple::Apple(sf::RectangleShape rectangle, int dimension, int scale)
+Apple::Apple(sf::RectangleShape &rectangle, int dimension, int scale)
 	: rect(rectangle), dim(dimension), scl(scale)
 {
 	changePos();
@@ -16,20 +16,22 @@ void Apple::changePos()
 	x = rand() % dim;
 	y = rand() % dim;
 	rect.setPosition(x * scl_f, y * scl_f);
-	std::cout << "mela: " << x << ", " << y << std::endl;
+	std::cout << "Disegnata a: " << x << ", " << y << std::endl;
 }
 
 int Apple::getX()
 {
+	std::cout << "Rect x location: " << rect.getPosition().x << std::endl;
 	return x;
 }
 
 int Apple::getY()
 {
+	std::cout << "Rect y location: " << rect.getPosition().x << std::endl;
 	return y;
 }
 
-void Apple::draw(sf::RenderWindow & window)
+void Apple::draw(sf::RenderWindow &window)
 {
 	window.draw(rect);
 }

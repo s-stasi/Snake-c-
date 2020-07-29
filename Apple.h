@@ -6,7 +6,7 @@
 class Apple
 {
 public:
-	Apple(sf::RectangleShape rectangle, int dimension, int scale);
+	Apple(sf::RectangleShape &rectangle, int dimension, int scale);
 	~Apple();
 	void changePos();
 	int getX();

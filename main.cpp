@@ -10,8 +10,10 @@
 #include "Apple.h"
 #include "images.h"
 #include "Version.h"
+
 #define _(STRING) gettext(STRING)
 #define VERSION "0.0.1"
+
 using namespace sf;
 using std::string;
 
@@ -32,7 +34,7 @@ struct Snake
 { int x,y;}  s[900];
 
 // Funzione gestione dei movimenti del bruco e posizionamento della mela
-void move(Apple apple, RenderWindow &window, float &delay){
+void move(Apple &apple, float &delay){
     // Controllo se il bruco è fuori dal campo di gioco
 	if(s[0].x==dim || s[0].y==dim || s[0].x==0-1 || s[0].y==0-1) 
     {
@@ -63,13 +65,15 @@ void move(Apple apple, RenderWindow &window, float &delay){
 	{
 		//std::cout << apple.getX() << " " << apple.getY() << std::endl;
 		num++;
-		std::cout << "Gamemode; " << gameMode << std::endl;
+		std::cout << "Gamemode: " << gameMode << std::endl;
 		if (gameMode == 1 && delay > 0.05)
 		{
 			delay -= 0.02f;
 		}
+		apple.getX();
+		apple.getY();
 		apple.changePos();
-		apple.draw(window);
+		
     }
 
 	isOn = true;
@@ -109,8 +113,11 @@ int main()
 	sf::RectangleShape rectapple(sf::Vector2f(20, 20));
 	rectapple.setFillColor(sf::Color::Red);
 
+	// Creazione prima mela
+	std::cout << "Inizializzazione mela" << std::endl;
 	Apple apple(rectapple, dim, scl_i);
 	apple.changePos();
+	apple.draw(window);
 
 	// Versione
 	Version version(VERSION, width_f, height_f);
@@ -186,7 +193,7 @@ int main()
 			if (timer>delay)
 			{
 				timer = 0;
-				move(apple, window, delay);
+				move(apple, delay);
 			}
 			window.clear(Color::Black);
 
