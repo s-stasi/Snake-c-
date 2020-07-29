@@ -12,7 +12,7 @@
 #include "Version.h"
 
 #define _(STRING) gettext(STRING)
-#define VERSION "0.0.1"
+#define VERSION "0.0.2"
 
 using namespace sf;
 using std::string;
