@@ -1,0 +1,8 @@
+- when the snake hits his tail, he should die
+
+- point system
+   - written
+
+- username system
+   - write a file for saving it
+   - make an imput shader

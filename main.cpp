@@ -4,6 +4,7 @@
 #include "Apple.h"
 #include "images.h"
 #include "Version.h"
+#include "Button.hpp"
 
 #define _(STRING) gettext(STRING)
 #define VERSION "0.0.2"
@@ -22,30 +23,34 @@ int dir, num = 1;
 int gameStatus = 0;
 int gameMode;
 bool close, isOn = false;
+float timer = 0, delay = 0.15f;
 
 // Creazione del bruco
 struct Snake 
 { int x,y;}  s[900];
 
+void death()
+{
+	num = 1;
+	s[0].x = 0;
+	s[0].y = 0;
+	dir = 0;
+	delay = 0.15f;
+	gameStatus = 0;
+}
+
 // Funzione gestione dei movimenti del bruco e posizionamento della mela
-void move(Apple &apple, float &delay){
+void move(Apple &apple){
     // Controllo se il bruco è fuori dal campo di gioco
 	if(s[0].x==dim || s[0].y==dim || s[0].x==0-1 || s[0].y==0-1) 
     {
-		num = 1;
-		s[0].x = 0;
-		s[0].y = 0;
-		dir = 0;
-		delay = 0.15f;
-		gameStatus = 0;
+		death();
     }
     for (int i = num; i > 0; i--)
     {
         // Spostamento del bruco
         s[i].x=s[i-1].x;
         s[i].y=s[i-1].y;
-		//std::cout << "mela: " << apple.getX() << ", " << apple.getY() << std::endl;
-		//std::cout << "bruco: " << s[0].x << ", " << s[0].y << std::endl;
     }
     
     if (dir==0){s[0].y+=1;}
@@ -69,13 +74,17 @@ void move(Apple &apple, float &delay){
 		apple.changePos();
 		
     }
+	for (int i = 1; i < num; i++)
+	{
+		if (s[i].x == s[0].x && s[i].y == s[0].y) death();
+	}
 
 	isOn = true;
     // Controllo se la mela è sopra al bruco
 	do
     {
 		isOn = false;
-        for (int i=0; i<num; i++)
+        for (int i = 0; i < num; i++)
         {
             if (s[i].x==apple.getX() && s[i].y==apple.getY())
             {
@@ -86,10 +95,9 @@ void move(Apple &apple, float &delay){
     } while (isOn == true);
 }
 
+
 int main()
 {
-    srand(time(0));
-
     // Creazione fnestra
     RenderWindow window(VideoMode(width, height), "Snake");
 
@@ -116,9 +124,8 @@ int main()
 	// Versione
 	Version version(VERSION, width_f, height_f);
 
-    // Oggetti e variabili per il framerate
-    Clock clock;   
-    float timer=0, delay=0.15f;
+    // Oggetti per il framerate
+    Clock clock;
 
 	// Menu
 	MainMenu menu(width_f, height_f);
@@ -187,7 +194,7 @@ int main()
 			if (timer>delay)
 			{
 				timer = 0;
-				move(apple, delay);
+				move(apple);
 			}
 			window.clear(Color::Black);
 
