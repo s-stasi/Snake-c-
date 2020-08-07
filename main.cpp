@@ -67,7 +67,7 @@ void move(Apple &apple){
 		std::cout << "Gamemode: " << gameMode << std::endl;
 		if (gameMode == 1 && delay > 0.25f)
 		{
-			delay -= 0.02f;
+			delay -= 0.04f;
 		}
 		apple.getX();
 		apple.getY();
@@ -205,7 +205,7 @@ int main()
 			}
 			apple.draw(window);
 		}
-
+		
 		else if (gameStatus == 2)
 		{
 			while (window.pollEvent(e))

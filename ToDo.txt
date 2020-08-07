@@ -1,4 +1,4 @@
-- when the snake hits his tail, he should die
+- when the snake hits his tail, he should die				MADE
 
 - point system
    - written
@@ -6,3 +6,9 @@
 - username system
    - write a file for saving it
    - make an imput shader
+
+- onlne layer
+   - sfml http post request
+      - post username
+	  - post points
+   - server and database 
