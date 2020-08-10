@@ -2,7 +2,6 @@
 #include "MainMenu.h"
 #include "ModMenu.h"
 #include "Apple.h"
-#include "images.h"
 #include "Version.h"
 #include "Button.hpp"
 
@@ -95,11 +94,10 @@ void move(Apple &apple){
     } while (isOn == true);
 }
 
-
-int main()
+int snake()
 {
-    // Creazione fnestra
-    RenderWindow window(VideoMode(width, height), "Snake");
+	// Creazione fnestra
+	RenderWindow window(VideoMode(width, height), "Snake", sf::Style::Close | sf::Style::Titlebar);
 
 	// Icona applicazione
 	Image icon;
@@ -109,9 +107,9 @@ int main()
 	}
 	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
-    // Creazione quadrati della mela e del bruco
-    RectangleShape rectangle(Vector2f(scl, scl));
-    rectangle.setFillColor(Color::Green);
+	// Creazione quadrati della mela e del bruco
+	RectangleShape rectangle(Vector2f(scl, scl));
+	rectangle.setFillColor(Color::Green);
 	sf::RectangleShape rectapple(sf::Vector2f(20, 20));
 	rectapple.setFillColor(sf::Color::Red);
 
@@ -124,8 +122,8 @@ int main()
 	// Versione
 	Version version(VERSION, width_f, height_f);
 
-    // Oggetti per il framerate
-    Clock clock;
+	// Oggetti per il framerate
+	Clock clock;
 
 	// Menu
 	MainMenu menu(width_f, height_f);
@@ -133,18 +131,18 @@ int main()
 	// Menu modalità
 	ModMenu modMenu(width_f, height_f);
 
-    // loop del gioco
-    while (window.isOpen())
-    {
-    	if (close == true) window.close();
-        float time = clock.getElapsedTime().asSeconds();
-        clock.restart();
-        timer+=time;
+	// loop del gioco
+	while (window.isOpen())
+	{
+		if (close == true) window.close();
+		float time = clock.getElapsedTime().asSeconds();
+		clock.restart();
+		timer += time;
 
-        Event e;
+		Event e;
 
 
-        if (gameStatus == 0)
+		if (gameStatus == 0)
 		{
 			while (window.pollEvent(e))
 			{
@@ -205,7 +203,7 @@ int main()
 			}
 			apple.draw(window);
 		}
-		
+
 		else if (gameStatus == 2)
 		{
 			while (window.pollEvent(e))
@@ -256,7 +254,13 @@ int main()
 		}
 
 		version.draw(window);
-        window.display();
-    }
+		window.display();
+	}
+	return 0;
+}
+
+int main()
+{
+	snake();
     return 0;
 }

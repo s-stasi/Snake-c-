@@ -9,6 +9,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
+#include <SFML/Window.hpp>
 
 /// Standard libraries
 
