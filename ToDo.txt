@@ -1,7 +1,7 @@
 - when the snake hits his tail, he should die				MADE
 
 - point system
-   - written
+   - render on the schreen
 
 - username system
    - write a file for saving it

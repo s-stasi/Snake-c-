@@ -19,13 +19,13 @@ void Apple::changePos()
 	std::cout << "Disegnata a: " << x << ", " << y << std::endl;
 }
 
-int Apple::getX()
+int Apple::getX() const
 {
 	std::cout << "Rect x location: " << rect.getPosition().x << std::endl;
 	return x;
 }
 
-int Apple::getY()
+int Apple::getY() const
 {
 	std::cout << "Rect y location: " << rect.getPosition().x << std::endl;
 	return y;

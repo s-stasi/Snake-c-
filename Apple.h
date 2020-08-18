@@ -9,8 +9,8 @@ public:
 	Apple(sf::RectangleShape &rectangle, int dimension, int scale);
 	~Apple();
 	void changePos();
-	int getX();
-	int getY();
+	int getX() const;
+	int getY() const;
 	void draw(sf::RenderWindow &window);
 
 private:

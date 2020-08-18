@@ -20,3 +20,11 @@
 #include <thread>
 #include <chrono>
 #include <future>
+
+/// My Headers
+
+#include "MainMenu.h"
+#include "ModMenu.h"
+#include "Apple.h"
+#include "Version.h"
+#include "setUser.h"

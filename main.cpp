@@ -1,9 +1,4 @@
 #include "dependencies.h"
-#include "MainMenu.h"
-#include "ModMenu.h"
-#include "Apple.h"
-#include "Version.h"
-#include "Button.hpp"
 
 #define _(STRING) gettext(STRING)
 #define VERSION "0.0.2"
@@ -23,6 +18,7 @@ int gameStatus = 0;
 int gameMode;
 bool close, isOn = false;
 float timer = 0, delay = 0.15f;
+
 
 // Creazione del bruco
 struct Snake 
@@ -261,6 +257,10 @@ int snake()
 
 int main()
 {
+	if (isFirstLaunch())
+	{
+		std::future<bool> userSetted = std::async(std::launch::async, setUser);
+	}
 	snake();
     return 0;
 }
