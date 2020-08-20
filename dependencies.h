@@ -1,5 +1,6 @@
 #pragma once
 #define VERSION "0.0.2 beta"
+bool isGameWindowOpen = false;
 
 /// Windows' libraries
 
@@ -29,6 +30,7 @@
 #include "Apple.h"
 #include "Version.h"
 #include "setUser.h"
+#include "points.h"
 #include "snake.h"
 
 /// My API

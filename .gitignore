@@ -53,6 +53,7 @@
 Debug/
 Release/
 x64/
+src/
 
 ## LOG Files
 *.log

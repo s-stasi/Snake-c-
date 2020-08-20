@@ -33,7 +33,7 @@ void death()
 }
 
 // Funzione gestione dei movimenti del bruco e posizionamento della mela
-void move(Apple &apple) {
+void move(Apple &apple, ::Points &points) {
 	// Controllo se il bruco è fuori dal campo di gioco
 	if (s[0].x == dim || s[0].y == dim || s[0].x == 0 - 1 || s[0].y == 0 - 1)
 	{
@@ -55,8 +55,9 @@ void move(Apple &apple) {
 	// creazione della nuova mela
 	if (s[0].x == apple.getX() && s[0].y == apple.getY())
 	{
-		//std::cout << apple.getX() << " " << apple.getY() << std::endl;
 		num++;
+		points.add(10U);
+		std::cout << points.getPoints() << std::endl;
 		std::cout << "Gamemode: " << gameMode << std::endl;
 		if (gameMode == 1 && delay > 0.25f)
 		{
@@ -125,9 +126,12 @@ int snake()
 	// Menu modalità
 	ModMenu modMenu(width_f, height_f);
 
+	::Points points;
+
 	// loop del gioco
 	while (window.isOpen())
 	{
+		isGameWindowOpen = true;
 		if (close == true) window.close();
 		float time = clock.getElapsedTime().asSeconds();
 		clock.restart();
@@ -186,7 +190,7 @@ int snake()
 			if (timer>delay)
 			{
 				timer = 0;
-				move(apple);
+				move(apple, points);
 			}
 			window.clear(Color::Black);
 
