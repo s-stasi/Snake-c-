@@ -1,11 +1,11 @@
-- when the snake hits his tail, he should die				MADE
+// - when the snake hits his tail, he should die
 
-- point system
-   - render on the schreen
+// - point system
+   // - render on the schreen
 
-- username system
-   - write a file for saving it
-   - make an imput shader
+// - username system
+   // - write a file for saving it
+   // - make an imput window
 
 - onlne layer
    - sfml http post request
