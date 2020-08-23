@@ -1,6 +1,4 @@
 #pragma once
-using namespace sf;
-using std::string;
 
 int width = 600;
 int height = 600;
@@ -33,7 +31,7 @@ void death()
 }
 
 // Funzione gestione dei movimenti del bruco e posizionamento della mela
-void move(Apple &apple, ::Points &points) {
+void move(Apple &apple, Points &points, sf::Sprite &head) {
 	// Controllo se il bruco è fuori dal campo di gioco
 	if (s[0].x == dim || s[0].y == dim || s[0].x == 0 - 1 || s[0].y == 0 - 1)
 	{
@@ -46,10 +44,30 @@ void move(Apple &apple, ::Points &points) {
 		s[i].y = s[i - 1].y;
 	}
 
-	if (dir == 0) { s[0].y += 1; }
-	if (dir == 1) { s[0].x -= 1; }
-	if (dir == 2) { s[0].x += 1; }
-	if (dir == 3) { s[0].y -= 1; }
+	if (dir == 0)
+	{ 
+		s[0].y += 1;
+		head.setRotation(180.f);
+		head.setPosition((s[1].x * 20) + scl, (s[1].y * 20) + scl * 2);
+	}
+	if (dir == 1) 
+	{
+		s[0].x -= 1;
+		head.setRotation(270.f);
+		head.setPosition((s[1].x * 20) - scl, (s[1].y * 20) + scl);
+	}
+	if (dir == 2)
+	{
+		s[0].x += 1;
+		head.setRotation(90.f);
+		head.setPosition((s[1].x * 20) + scl * 2, s[1].y * 20);
+	}
+	if (dir == 3)
+	{
+		s[0].y -= 1;
+		head.setRotation(0.f);
+		head.setPosition(s[1].x * 20, (s[1].y * 20) - scl);
+	}
 
 	// Controllo se il bruco ha mangiato la mela e
 	// creazione della nuova mela
@@ -92,19 +110,27 @@ void move(Apple &apple, ::Points &points) {
 int snake()
 {
 	// Creazione fnestra
-	RenderWindow window(VideoMode(width, height), "Snake", sf::Style::Close | sf::Style::Titlebar);
+	sf::RenderWindow window(sf::VideoMode(width, height), "Snake", sf::Style::Close | sf::Style::Titlebar);
+
+	sf::Texture head;
+	if (!head.loadFromFile("img/head.bmp"))
+	{
+		std::cout << "failed to load head image" << std::endl;
+	}
+	sf::Sprite spriteHead;
+	spriteHead.setTexture(head);
 
 	// Icona applicazione
-	Image icon;
-	if (!icon.loadFromFile("icon.bmp"))
+	sf::Image icon;
+	if (!icon.loadFromFile("img/icon.bmp"))
 	{
-		std::cout << "failed to load image" << std::endl;
+		std::cout << "failed to load icon image" << std::endl;
 	}
 	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 	// Creazione quadrati della mela e del bruco
-	RectangleShape rectangle(Vector2f(scl, scl));
-	rectangle.setFillColor(Color::Green);
+	sf::RectangleShape rectangle(sf::Vector2f(scl, scl));
+	rectangle.setFillColor(sf::Color::Green);
 	sf::RectangleShape rectapple(sf::Vector2f(20, 20));
 	rectapple.setFillColor(sf::Color::Red);
 
@@ -118,7 +144,7 @@ int snake()
 	Version version(VERSION, width_f, height_f);
 
 	// Oggetti per il framerate
-	Clock clock;
+	sf::Clock clock;
 
 	// Menu
 	MainMenu menu(width_f, height_f);
@@ -126,7 +152,7 @@ int snake()
 	// Menu modalità
 	ModMenu modMenu(width_f, height_f);
 
-	::Points points;
+	Points points;
 
 	// loop del gioco
 	while (window.isOpen())
@@ -137,7 +163,7 @@ int snake()
 		clock.restart();
 		timer += time;
 
-		Event e;
+		sf::Event e;
 
 
 		if (gameStatus == 0)
@@ -146,21 +172,21 @@ int snake()
 			{
 				switch (e.type)
 				{
-				case Event::Closed:
+				case sf::Event::Closed:
 					window.close();
 					break;
-				case Event::KeyReleased:
+				case sf::Event::KeyReleased:
 					switch (e.key.code)
 					{
-					case Keyboard::Up:
+					case sf::Keyboard::Up:
 						std::cout << "pressed up arrow" << std::endl;
 						menu.moveUp();
 						break;
-					case Keyboard::Down:
+					case sf::Keyboard::Down:
 						std::cout << "pressed down arrow" << std::endl;
 						menu.moveDown();
 						break;
-					case Keyboard::Return:
+					case sf::Keyboard::Return:
 						switch (menu.getPressedItem())
 						{
 						case 0:
@@ -177,28 +203,29 @@ int snake()
 					break;
 				}
 			}
-			window.clear(Color::Black);
+			window.clear(sf::Color::Black);
 			menu.draw(window);
 		}
 
 		else if (gameStatus == 1)
 		{
-			if (Keyboard::isKeyPressed(Keyboard::Left) && dir != 2) dir = 1;
-			if (Keyboard::isKeyPressed(Keyboard::Right) && dir != 1) dir = 2;
-			if (Keyboard::isKeyPressed(Keyboard::Up) && dir != 0) dir = 3;
-			if (Keyboard::isKeyPressed(Keyboard::Down) && dir != 3) dir = 0;
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && dir != 2) dir = 1;
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && dir != 1) dir = 2;
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && dir != 0) dir = 3;
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && dir != 3) dir = 0;
 			if (timer>delay)
 			{
 				timer = 0;
-				move(apple, points);
+				move(apple, points, spriteHead);
 			}
-			window.clear(Color::Black);
+			window.clear(sf::Color::Black);
 
-			for (int i = 0; i<num; i++)
+			for (int i = 1; i<num; i++)
 			{
 				rectangle.setPosition(s[i].x*scl, s[i].y*scl);
 				window.draw(rectangle);
 			}
+			window.draw(spriteHead);
 			apple.draw(window);
 		}
 
@@ -208,21 +235,21 @@ int snake()
 			{
 				switch (e.type)
 				{
-				case Event::Closed:
+				case sf::Event::Closed:
 					window.close();
 					break;
-				case Event::KeyReleased:
+				case sf::Event::KeyReleased:
 					switch (e.key.code)
 					{
-					case Keyboard::Up:
+					case sf::Keyboard::Up:
 						std::cout << "pressed up arrow" << std::endl;
 						modMenu.moveUp();
 						break;
-					case Keyboard::Down:
+					case sf::Keyboard::Down:
 						std::cout << "pressed down arrow" << std::endl;
 						modMenu.moveDown();
 						break;
-					case Keyboard::Return:
+					case sf::Keyboard::Return:
 
 
 						switch (modMenu.getPressedItem())
@@ -247,9 +274,10 @@ int snake()
 					break;
 				}
 			}
-			window.clear(Color::Black);
+			window.clear(sf::Color::Black);
 			modMenu.draw(window);
 		}
+
 
 		version.draw(window);
 		window.display();
