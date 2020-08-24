@@ -3,7 +3,7 @@ class renderHead
 {
 public:
 	renderHead();
-	renderHead(sf::Color &color, std::string colName);
+	renderHead(const sf::Color color, std::string colName);
 	~renderHead();
 
 	void setPosition(float x, float y);

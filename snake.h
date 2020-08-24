@@ -31,7 +31,7 @@ void death()
 }
 
 // Funzione gestione dei movimenti del bruco e posizionamento della mela
-void move(Apple &apple, Points &points, sf::Sprite &head) {
+void move(Apple &apple, Points &points, renderHead &head) {
 	// Controllo se il bruco è fuori dal campo di gioco
 	if (s[0].x == dim || s[0].y == dim || s[0].x == 0 - 1 || s[0].y == 0 - 1)
 	{
@@ -112,13 +112,8 @@ int snake()
 	// Creazione fnestra
 	sf::RenderWindow window(sf::VideoMode(width, height), "Snake", sf::Style::Close | sf::Style::Titlebar);
 
-	sf::Texture head;
-	if (!head.loadFromFile("img/head.bmp"))
-	{
-		std::cout << "failed to load head image" << std::endl;
-	}
-	sf::Sprite spriteHead;
-	spriteHead.setTexture(head);
+	renderHead head(sf::Color::Red, (std::string)"red");
+	
 
 	// Icona applicazione
 	sf::Image icon;
@@ -216,7 +211,7 @@ int snake()
 			if (timer>delay)
 			{
 				timer = 0;
-				move(apple, points, spriteHead);
+				move(apple, points, head);
 			}
 			window.clear(sf::Color::Black);
 
@@ -225,7 +220,7 @@ int snake()
 				rectangle.setPosition(s[i].x*scl, s[i].y*scl);
 				window.draw(rectangle);
 			}
-			window.draw(spriteHead);
+			head.draw(window);
 			apple.draw(window);
 		}
 
