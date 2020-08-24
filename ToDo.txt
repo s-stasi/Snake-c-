@@ -8,7 +8,7 @@
    // - make an imput window
 
 // - use a smile for the first block of the snake
-   - class for rnder the smile from an imput color
+   - class to render the smile from an imput color
 
 - onlne layer
    - sfml http post request
