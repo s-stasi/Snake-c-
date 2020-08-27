@@ -20,13 +20,14 @@ struct Snake
 	int x, y;
 }  s[900];
 
-void death()
+void death(Points &points)
 {
 	num = 1;
 	s[0].x = 0;
 	s[0].y = 0;
 	dir = 0;
 	delay = 0.15f;
+	points.reset();
 	gameStatus = 0;
 }
 
@@ -35,7 +36,7 @@ void move(Apple &apple, Points &points, renderHead &head) {
 	// Controllo se il bruco è fuori dal campo di gioco
 	if (s[0].x == dim || s[0].y == dim || s[0].x == 0 - 1 || s[0].y == 0 - 1)
 	{
-		death();
+		death(points);
 	}
 	for (int i = num; i > 0; i--)
 	{
@@ -88,7 +89,7 @@ void move(Apple &apple, Points &points, renderHead &head) {
 	}
 	for (int i = 1; i < num; i++)
 	{
-		if (s[i].x == s[0].x && s[i].y == s[0].y) death();
+		if (s[i].x == s[0].x && s[i].y == s[0].y) death(points);
 	}
 
 	isOn = true;
@@ -147,7 +148,10 @@ int snake()
 	// Menu modalità
 	ModMenu modMenu(width_f, height_f);
 
-	Points points;
+	sf::Font arial;
+	arial.loadFromFile("Font/arial.ttf");
+
+	Points points({static_cast<float>(window.getSize().x) / 2, 20.f}, arial, 20U);
 
 	// loop del gioco
 	while (window.isOpen())
@@ -220,6 +224,7 @@ int snake()
 				rectangle.setPosition(s[i].x*scl, s[i].y*scl);
 				window.draw(rectangle);
 			}
+			points.draw(window);
 			head.draw(window);
 			apple.draw(window);
 		}

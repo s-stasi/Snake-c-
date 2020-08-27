@@ -45,6 +45,11 @@ void Points::save()
 	out << m_points;
 }
 
+void Points::reset()
+{
+	m_points = 0;
+}
+
 void Points::add(unsigned int p)
 {
 	m_points += p;
@@ -52,6 +57,7 @@ void Points::add(unsigned int p)
 
 void Points::draw(sf::RenderWindow &window)
 {
+	m_text.setString(std::to_string(m_points));
 	window.draw(m_text);
 }
 

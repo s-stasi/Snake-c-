@@ -15,6 +15,7 @@ public:
 	void setFont(const sf::Font &font);
 	void setCharSize(unsigned int size);
 	void save();
+	void reset();
 	void add(unsigned int p);
 	void draw(sf::RenderWindow &window);
 
