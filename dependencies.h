@@ -1,5 +1,5 @@
 #pragma once
-#define VERSION "0.0.2 beta"
+#define VERSION "0.0.3 beta"
 bool isGameWindowOpen = false;
 
 /// Windows' libraries
