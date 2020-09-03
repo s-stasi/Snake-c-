@@ -7,7 +7,7 @@
 
 bool isFirstLaunch()
 {
-	std::experimental::filesystem::path firstAccess("src\\firstAccess.confirm");
+	std::experimental::filesystem::path firstAccess("C:/Users/" + SfmlAPI::getSystemUser() + "/AppData/Local/Snake/src/firstAccess.confirm");
 	if (!std::experimental::filesystem::exists(firstAccess))
 	{
 		std::cout << "vero" << std::endl;
@@ -25,7 +25,7 @@ bool isFirstLaunch()
 
 void saveUserName(std::string name)
 {
-	std::experimental::filesystem::path userName("src\\username");
+	std::experimental::filesystem::path userName("C:/Users/" + SfmlAPI::getSystemUser() + "/AppData/Local/Snake/src/username");
 	std::ofstream out(userName, std::ios::trunc);
 	out << name;
 	out.close();

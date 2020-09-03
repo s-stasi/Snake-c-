@@ -12,7 +12,7 @@ Apple::~Apple()
 
 void Apple::changePos()
 {
-	srand(time(NULL));
+	srand(rand());
 	x = rand() % dim;
 	y = rand() % dim;
 	rect.setPosition(x * scl_f, y * scl_f);

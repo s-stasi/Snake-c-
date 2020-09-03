@@ -1,5 +1,5 @@
 #pragma once
-#define VERSION "0.0.3 beta"
+#define VERSION "0.0.4 beta"
 bool isGameWindowOpen = false;
 
 /// Windows' libraries
@@ -23,6 +23,10 @@ bool isGameWindowOpen = false;
 #include <chrono>
 #include <future>
 
+/// My API
+
+#include "SfmlAPI.hpp"
+
 /// My Headers
 
 #include "MainMenu.h"
@@ -33,7 +37,3 @@ bool isGameWindowOpen = false;
 #include "renderHead.h"
 #include "points.h"
 #include "snake.h"
-
-/// My API
-
-#include "SfmlAPI.hpp"

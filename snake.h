@@ -1,5 +1,5 @@
 #pragma once
-
+int fps = 6;
 int width = 600;
 int height = 600;
 float width_f = 600.0f;
@@ -11,7 +11,7 @@ int dir, num = 1;
 int gameStatus = 0;
 int gameMode;
 bool close, isOn = false;
-float timer = 0, delay = 0.15f;
+float timer = 0, delay;
 
 
 // Creazione del bruco
@@ -22,11 +22,12 @@ struct Snake
 
 void death(Points &points)
 {
+	fps = (gameMode == 1) ? 2 : 6;
 	num = 1;
 	s[0].x = 0;
 	s[0].y = 0;
 	dir = 0;
-	delay = 0.15f;
+	delay = SfmlAPI::fpsAsSecs(fps);
 	points.reset();
 	gameStatus = 0;
 }
@@ -61,7 +62,7 @@ void move(Apple &apple, Points &points, renderHead &head) {
 	{
 		s[0].x += 1;
 		head.setRotation(90.f);
-		head.setPosition((s[1].x * 20) + scl * 2, s[1].y * 20);
+		head.setPosition((static_cast<float>(s[1].x) * 20.f) + scl * 2.f, static_cast<float>(s[1].y) * 20.f);
 	}
 	if (dir == 3)
 	{
@@ -78,9 +79,9 @@ void move(Apple &apple, Points &points, renderHead &head) {
 		points.add(10U);
 		std::cout << points.getPoints() << std::endl;
 		std::cout << "Gamemode: " << gameMode << std::endl;
-		if (gameMode == 1 && delay > 0.25f)
+		if (gameMode == 1 && fps <= 10)
 		{
-			delay -= 0.04f;
+			fps += 1;
 		}
 		apple.getX();
 		apple.getY();
@@ -113,12 +114,12 @@ int snake()
 	// Creazione fnestra
 	sf::RenderWindow window(sf::VideoMode(width, height), "Snake", sf::Style::Close | sf::Style::Titlebar);
 
-	renderHead head(sf::Color::Red, (std::string)"red");
+	renderHead head(sf::Color::Green, (std::string)"green");
 	
 
 	// Icona applicazione
 	sf::Image icon;
-	if (!icon.loadFromFile("img/icon.bmp"))
+	if (!icon.loadFromFile("C:/Users/" + SfmlAPI::getSystemUser() + "/AppData/Local/Snake/img/icon.bmp"))
 	{
 		std::cout << "failed to load icon image" << std::endl;
 	}
@@ -161,6 +162,7 @@ int snake()
 		float time = clock.getElapsedTime().asSeconds();
 		clock.restart();
 		timer += time;
+		delay = SfmlAPI::fpsAsSecs(fps);
 
 		sf::Event e;
 
@@ -208,6 +210,15 @@ int snake()
 
 		else if (gameStatus == 1)
 		{
+			while (window.pollEvent(e))
+			{
+				switch (e.type)
+				{
+				case sf::Event::Closed:
+					window.close();
+					break;
+				}
+			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && dir != 2) dir = 1;
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && dir != 1) dir = 2;
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && dir != 0) dir = 3;
@@ -216,6 +227,7 @@ int snake()
 			{
 				timer = 0;
 				move(apple, points, head);
+				std::cout << "Speed: " << fps << " fps" << std::endl;
 			}
 			window.clear(sf::Color::Black);
 
@@ -256,10 +268,12 @@ int snake()
 						{
 						case 0:
 							std::cout << "normale" << std::endl;
+							fps = 6;
 							gameMode = 0;
 							break;
 						case 1:
 							std::cout << "veloce" << std::endl;
+							fps = 2;
 							gameMode = 1;
 							break;
 						case 2:
