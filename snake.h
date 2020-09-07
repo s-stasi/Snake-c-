@@ -12,6 +12,7 @@ int gameStatus = 0;
 int gameMode;
 bool close, isOn = false;
 float timer = 0, delay;
+float clearEvent = false;
 
 
 // Creazione del bruco
@@ -29,6 +30,7 @@ void death(Points &points)
 	dir = 0;
 	delay = SfmlAPI::fpsAsSecs(fps);
 	points.reset();
+	clearEvent = true;
 	gameStatus = 0;
 }
 
@@ -169,6 +171,12 @@ int snake()
 
 		if (gameStatus == 0)
 		{
+			if (clearEvent)
+			{
+				while (window.pollEvent(e));
+				clearEvent = false;
+			}
+
 			while (window.pollEvent(e))
 			{
 				switch (e.type)
