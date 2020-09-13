@@ -3,12 +3,12 @@
 
 
 Points::Points(unsigned int points)
-	: m_points(points), m_path("src/points")
+	: m_points(points), m_path("C:/Users/" + SfmlAPI::getSystemUser() + "/AppData/Local/Snake/src/points")
 {
 }
 
 Points::Points(sf::Vector2f pos, const sf::Font & font, unsigned int size)
-	: m_points(0U), m_path("src/points")
+	: m_points(0U), m_path("C:/Users/" + SfmlAPI::getSystemUser() + "/AppData/Local/Snake/src/points")
 {
 	m_text.setPosition(pos);
 	m_text.setFont(font);

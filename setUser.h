@@ -5,24 +5,6 @@
 #include <filesystem>
 #include "SfmlAPI.hpp"
 
-bool isFirstLaunch()
-{
-	std::experimental::filesystem::path firstAccess("C:/Users/" + SfmlAPI::getSystemUser() + "/AppData/Local/Snake/src/firstAccess.confirm");
-	if (!std::experimental::filesystem::exists(firstAccess))
-	{
-		std::cout << "vero" << std::endl;
-		std::ofstream out(firstAccess);
-		out << "not first access";
-		out.close();
-		return true;
-	}
-	else
-	{
-		std::cout << "falso" << std::endl;
-		return false;
-	}
-}
-
 void saveUserName(std::string name)
 {
 	std::experimental::filesystem::path userName("C:/Users/" + SfmlAPI::getSystemUser() + "/AppData/Local/Snake/src/username");
@@ -61,6 +43,9 @@ bool setUser()
 			{
 				switch (e.type)
 				{
+				case sf::Event::Closed:
+					setUserWindow.close();
+					break;
 				case sf::Event::TextEntered:
 					textbox.typedOn(e);
 					break;

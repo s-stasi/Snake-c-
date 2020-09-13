@@ -29,6 +29,7 @@ void death(Points &points)
 	s[0].y = 0;
 	dir = 0;
 	delay = SfmlAPI::fpsAsSecs(fps);
+	points.save();
 	points.reset();
 	clearEvent = true;
 	gameStatus = 0;
@@ -70,7 +71,7 @@ void move(Apple &apple, Points &points, renderHead &head) {
 	{
 		s[0].y -= 1;
 		head.setRotation(0.f);
-		head.setPosition(s[1].x * 20, (s[1].y * 20) - scl);
+		head.setPosition(static_cast<float>(s[1].x) * 20, (static_cast<float>(s[1].y) * 20) - scl);
 	}
 
 	// Controllo se il bruco ha mangiato la mela e

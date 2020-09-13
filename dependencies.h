@@ -29,6 +29,7 @@ bool isGameWindowOpen = false;
 
 /// My Headers
 
+#include "firstLaunch.h"
 #include "MainMenu.h"
 #include "ModMenu.h"
 #include "Apple.h"
