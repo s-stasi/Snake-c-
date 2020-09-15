@@ -1,4 +1,6 @@
 #pragma once
+#include "SfmlAPI.hpp"
+#include "Menu.hpp"
 int fps = 6;
 int width = 600;
 int height = 600;
@@ -114,6 +116,10 @@ void move(Apple &apple, Points &points, renderHead &head) {
 
 int snake()
 {
+
+	sf::Font arial;
+	arial.loadFromFile("Font/arial.ttf");
+
 	// Creazione fnestra
 	sf::RenderWindow window(sf::VideoMode(width, height), "Snake", sf::Style::Close | sf::Style::Titlebar);
 
@@ -147,13 +153,15 @@ int snake()
 	sf::Clock clock;
 
 	// Menu
-	MainMenu menu(width_f, height_f);
+	std::vector<std::string> menu_str;
+	menu_str.push_back("Play");
+	menu_str.push_back("Settings");
+	menu_str.push_back("Exit");
+	SfmlAPI::Menu menu(menu_str, arial);
 
 	// Menu modalità
 	ModMenu modMenu(width_f, height_f);
 
-	sf::Font arial;
-	arial.loadFromFile("Font/arial.ttf");
 
 	Points points({static_cast<float>(window.getSize().x) / 2, 20.f}, arial, 20U);
 

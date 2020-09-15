@@ -26,6 +26,7 @@ bool isGameWindowOpen = false;
 /// My API
 
 #include "SfmlAPI.hpp"
+#include "Menu.hpp"
 
 /// My Headers
 
