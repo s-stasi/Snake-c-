@@ -1,4 +1,4 @@
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <fstream>
 #include <string>
 #include <experimental\filesystem>

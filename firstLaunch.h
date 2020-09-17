@@ -1,5 +1,5 @@
 #pragma once
-#include <experimental\filesystem>
+#include <experimental/filesystem>
 #include <filesystem>
 
 bool firstLaunch = false;

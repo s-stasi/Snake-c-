@@ -118,7 +118,7 @@ int snake()
 {
 
 	sf::Font arial;
-	arial.loadFromFile("Font/arial.ttf");
+	arial.loadFromFile(font_arial_file);
 
 	// Creazione fnestra
 	sf::RenderWindow window(sf::VideoMode(width, height), "Snake", sf::Style::Close | sf::Style::Titlebar);
@@ -128,7 +128,7 @@ int snake()
 
 	// Icona applicazione
 	sf::Image icon;
-	if (!icon.loadFromFile("C:/Users/" + SfmlAPI::getSystemUser() + "/AppData/Local/Snake/img/icon.bmp"))
+	if (!icon.loadFromFile(icon_img))
 	{
 		std::cout << "failed to load icon image" << std::endl;
 	}

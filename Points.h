@@ -1,8 +1,8 @@
 #pragma once
-#include <experimental\filesystem>
+#include <experimental/filesystem>
 #include <filesystem>
 #include <fstream>
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include "SfmlAPI.hpp"
 
 class Points
