@@ -1,6 +1,5 @@
 #pragma once
-#include "SfmlAPI.hpp"
-#include "Menu.hpp"
+
 int fps = 6;
 int width = 600;
 int height = 600;
@@ -153,14 +152,18 @@ int snake()
 	sf::Clock clock;
 
 	// Menu
-	std::vector<std::string> menu_str;
-	menu_str.push_back("Play");
-	menu_str.push_back("Settings");
-	menu_str.push_back("Exit");
-	SfmlAPI::Menu menu(menu_str, arial);
+	std::vector<std::string> mainMenu_str;
+	mainMenu_str.push_back("Play");
+	mainMenu_str.push_back("Settings");
+	mainMenu_str.push_back("Exit");
+	SfmlAPI::Menu mainMenu(mainMenu_str, arial);
 
 	// Menu modalità
-	ModMenu modMenu(width_f, height_f);
+	std::vector<std::string> modMenu_str;
+	modMenu_str.push_back("Normal mode");
+	modMenu_str.push_back("Progressive speed mode");
+	modMenu_str.push_back("Exit");
+	SfmlAPI::Menu modMenu(modMenu_str, arial);
 
 
 	Points points({static_cast<float>(window.getSize().x) / 2, 20.f}, arial, 20U);
@@ -198,14 +201,14 @@ int snake()
 					{
 					case sf::Keyboard::Up:
 						std::cout << "pressed up arrow" << std::endl;
-						menu.moveUp();
+						mainMenu.moveUp();
 						break;
 					case sf::Keyboard::Down:
 						std::cout << "pressed down arrow" << std::endl;
-						menu.moveDown();
+						mainMenu.moveDown();
 						break;
 					case sf::Keyboard::Return:
-						switch (menu.getPressedItem())
+						switch (mainMenu.getPressedItem())
 						{
 						case 0:
 							gameStatus = 1;
@@ -222,7 +225,7 @@ int snake()
 				}
 			}
 			window.clear(sf::Color::Black);
-			menu.draw(window);
+			mainMenu.draw(window);
 		}
 
 		else if (gameStatus == 1)

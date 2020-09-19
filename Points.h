@@ -4,6 +4,7 @@
 #include <fstream>
 #include <SFML/Graphics.hpp>
 #include "SfmlAPI.hpp"
+#include "strings.h"
 
 class Points
 {

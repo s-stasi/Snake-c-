@@ -6,7 +6,7 @@ bool firstLaunch = false;
 
 bool isFirstLaunch()
 {
-	std::experimental::filesystem::path firstAccess("C:/Users/" + SfmlAPI::getSystemUser() + "/AppData/Local/Snake/src/firstAccess.confirm");
+	std::experimental::filesystem::path firstAccess(acc_confirm_file);
 	if (!std::experimental::filesystem::exists(firstAccess))
 	{
 		std::ofstream out(firstAccess);
@@ -19,5 +19,5 @@ bool isFirstLaunch()
 
 void createDirs()
 {
-	std::experimental::filesystem::create_directories("C:/Users/" + SfmlAPI::getSystemUser() + "/AppData/Local/Snake/img/heads");
+	std::experimental::filesystem::create_directories(head_dir);
 }

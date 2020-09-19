@@ -7,7 +7,7 @@
 
 void saveUserName(std::string name)
 {
-	std::experimental::filesystem::path userName("C:/Users/" + SfmlAPI::getSystemUser() + "/AppData/Local/Snake/src/username");
+	std::experimental::filesystem::path userName(username_file);
 	std::ofstream out(userName, std::ios::trunc);
 	out << name;
 	out.close();

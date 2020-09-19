@@ -6,6 +6,7 @@
 #include "SfmlAPI.hpp"
 #include "RenderHead.h"
 
+
 renderHead::renderHead()
 {
 }
@@ -14,7 +15,7 @@ renderHead::renderHead(const sf::Color color, std::string colName)
 	:m_color(color)
 {
 	
-	m_path = "C:/Users/" + SfmlAPI::getSystemUser() + "/AppData/Local/Snake/img/heads/";
+	m_path = head_dir;
 	m_path += colName + ".bmp";
 	std::experimental::filesystem::path controlPath(m_path);
 	if (!std::experimental::filesystem::exists(controlPath))

@@ -1,4 +1,6 @@
 #pragma once
+#include "strings.h"
+
 class renderHead
 {
 public:
