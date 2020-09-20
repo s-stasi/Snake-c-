@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <fstream>
 #include <string>
-#include <experimental\filesystem>
+#include <experimental/filesystem>
 #include <filesystem>
 #include "SfmlAPI.hpp"
 #include "RenderHead.h"
