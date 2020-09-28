@@ -4,15 +4,15 @@
 
 PROG = Snake
 CC = g++
-OBJ = main.o Apple.o MainMenu.o ModMenu.o Points.o Version.o
-LIBS = -lstdc++fs -lsfml-network -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
+OBJ = main.o Apple.o Points.o Version.o
+LIBS = 
 MYLIB = -LSfmlApi/ -ISfmlAPI/ -lSfmlAPI
 
 $(PROG): $(OBJ)
-	$(CC) -o $(PROG) $(MYLIB) $(OBJ)
+	$(CC) -o $(PROG) -lstdc++fs -lsfml-network -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system $(MYLIB) $(OBJ)
 
 %.o: %.cpp %.hpp
-	$(CC) -c $^ $(LIBS)
+	$(CC) -c $^ -lstdc++fs -lsfml-network -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 
 libSfmlApi:
 	echo "\n \n--------- Building 'SfmlAPI' library ---------\n \n"

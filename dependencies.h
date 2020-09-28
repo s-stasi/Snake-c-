@@ -33,10 +33,11 @@ bool isGameWindowOpen = false;
 
 /// My Headers
 
+#include "Connection.h"
 #include "firstLaunch.h"
 #include "Apple.h"
 #include "Version.h"
-#include "setUser.h"
-#include "renderHead.h"
-#include "points.h"
+#include "SetUser.h"
+#include "RenderHead.h"
+#include "Points.h"
 #include "snake.h"

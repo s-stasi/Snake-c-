@@ -168,6 +168,9 @@ int snake()
 
 	Points points({static_cast<float>(window.getSize().x) / 2, 20.f}, arial, 20U);
 
+	sf::Clock fpsClock;
+	float lastTime = 0;
+
 	// loop del gioco
 	while (window.isOpen())
 	{
@@ -315,6 +318,9 @@ int snake()
 
 		version.draw(window);
 		window.display();
+		//float currentTime = clock.restart().asSeconds();
+		//float fpsCount = 1.f / currentTime;
+		//std::cout << "fps: " << fpsCount << std::endl;
 	}
 	return 0;
 }

@@ -1,11 +1,23 @@
 #include "dependencies.h"
 
+
 int main()
 {
-	std::future<int> snake_result = std::async(std::launch::async, snake);
+	std::thread snake_thread(snake);
+
 	while (!isGameWindowOpen)
 	{ }
-	
-	std::future<bool> user = std::async(std::launch::async, setUser);
+
+	Connection* connect = new Connection;
+	connect->newUser((std::string)"bellalui");
+
+	if (isFirstLaunch())
+	{
+		std::thread user_thread(setUser);
+		user_thread.join();
+	}
+
+	snake_thread.join();
+
 	return 0;
 }
