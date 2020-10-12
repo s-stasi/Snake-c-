@@ -55,6 +55,7 @@ Debug/
 Release/
 x64/
 src/
+img/heads/
 
 ## LOG Files
 *.log

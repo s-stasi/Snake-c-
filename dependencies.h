@@ -37,7 +37,7 @@ bool isGameWindowOpen = false;
 #include "firstLaunch.h"
 #include "Apple.h"
 #include "Version.h"
-#include "SetUser.h"
+#include "user.h"
 #include "RenderHead.h"
 #include "Points.h"
 #include "snake.h"

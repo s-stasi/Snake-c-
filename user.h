@@ -13,6 +13,15 @@ void saveUserName(std::string name)
 	out.close();
 }
 
+std::string getUser()
+{
+	std::string str;
+	std::ifstream in(username_file);
+	std::getline(in, str);
+	in.close();
+	return str;
+}
+
 void setUser()
 {
 	std::string name;
