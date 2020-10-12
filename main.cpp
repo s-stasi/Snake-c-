@@ -3,13 +3,12 @@
 
 int main()
 {
-	std::thread snake_thread(snake);
-
-	while (!isGameWindowOpen)
-	{ }
-
 	Connection* connect = new Connection;
-	connect->newUser((std::string)"bellalui");
+
+	std::thread snake_thread(snake, connect);
+
+	std::cout << __cplusplus << std::endl;
+
 
 	if (isFirstLaunch())
 	{

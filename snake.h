@@ -3,18 +3,14 @@
 int fps = 6;
 int width = 600;
 int height = 600;
-float width_f = 600.0f;
-float height_f = 600.0f;
 float scl = 20.0;
-int scl_i = 20;
 int dim = 30;
 int dir, num = 1;
 int gameStatus = 0;
 int gameMode;
 bool close, isOn = false;
 float timer = 0, delay;
-float clearEvent = false;
-
+bool clearEvent = false;
 
 // Creazione del bruco
 struct Snake
@@ -22,7 +18,7 @@ struct Snake
 	int x, y;
 }  s[900];
 
-void death(Points &points)
+void death(Points &points, Connection *connect)
 {
 	fps = (gameMode == 1) ? 2 : 6;
 	num = 1;
@@ -32,16 +28,17 @@ void death(Points &points)
 	delay = SfmlAPI::fpsAsSecs(fps);
 	points.save();
 	points.reset();
+	connect->sendScore(points, getUser());
 	clearEvent = true;
 	gameStatus = 0;
 }
 
 // Funzione gestione dei movimenti del bruco e posizionamento della mela
-void move(Apple &apple, Points &points, renderHead &head) {
+void move(Apple &apple, Points &points, renderHead &head, Connection *connect) {
 	// Controllo se il bruco è fuori dal campo di gioco
 	if (s[0].x == dim || s[0].y == dim || s[0].x == 0 - 1 || s[0].y == 0 - 1)
 	{
-		death(points);
+		death(points, connect);
 	}
 	for (int i = num; i > 0; i--)
 	{
@@ -94,7 +91,7 @@ void move(Apple &apple, Points &points, renderHead &head) {
 	}
 	for (int i = 1; i < num; i++)
 	{
-		if (s[i].x == s[0].x && s[i].y == s[0].y) death(points);
+		if (s[i].x == s[0].x && s[i].y == s[0].y) death(points, connect);
 	}
 
 	isOn = true;
@@ -113,9 +110,8 @@ void move(Apple &apple, Points &points, renderHead &head) {
 	} while (isOn == true);
 }
 
-int snake()
+int snake(Connection *connect)
 {
-
 	sf::Font arial;
 	arial.loadFromFile(font_arial_file);
 
@@ -141,12 +137,12 @@ int snake()
 
 	// Creazione prima mela
 	std::cout << "Inizializzazione mela" << std::endl;
-	Apple apple(rectapple, dim, scl_i);
+	Apple apple(rectapple, dim, static_cast<int>(scl));
 	apple.changePos();
 	apple.draw(window);
 
 	// Versione
-	Version version(VERSION, width_f, height_f);
+	Version version(VERSION, static_cast<float>(width), static_cast<float>(height));
 
 	// Oggetti per il framerate
 	sf::Clock clock;
@@ -249,7 +245,7 @@ int snake()
 			if (timer>delay)
 			{
 				timer = 0;
-				move(apple, points, head);
+				move(apple, points, head, connect);
 				std::cout << "Speed: " << fps << " fps" << std::endl;
 			}
 			window.clear(sf::Color::Black);

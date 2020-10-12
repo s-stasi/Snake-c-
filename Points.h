@@ -22,9 +22,11 @@ public:
 	void draw(sf::RenderWindow &window);
 
 	unsigned int getPoints() const;
+	unsigned int getMaxPoints() const;
 
 private:
 	unsigned int							m_points;
 	std::experimental::filesystem::path		m_path;
 	sf::Text								m_text;
+	unsigned int							m_maxPoints;
 };
