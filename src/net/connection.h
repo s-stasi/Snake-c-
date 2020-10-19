@@ -1,5 +1,4 @@
 #pragma once
-#include "../Points.h"
 #include <SFML/Network.hpp>
 #include <iostream>
 #include <sstream>
@@ -12,9 +11,9 @@ namespace net
 		Connection();
 		~Connection();
 
-		void sendScore(Points &points, const std::string& name);
+		void sendScore(int points, const std::string& name);
 		void newUser(std::string& name);
-		void getList(std::string & name);
+		void getList();
 		void checkExixt(std::string& name);
 
 	private:

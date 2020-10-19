@@ -1,12 +1,18 @@
 #include <thread>
 #include "net/Connection.h"
+#include "xmlParser/XmlParser.h"
 #include "SfmlAPI.hpp"
 #include "snake.h"
+#include "strings.h"
+#include <die-xml\SaxParser.h>
+
 
 int main()
 {
+	XmlParser as;
+	XmlParser az;
+	XmlParser ar;
 	net::Connection* connect = new net::Connection;
-	connect->getList(std::string("miiinghia"));
 
 	std::thread snake_thread(snake, connect);
 

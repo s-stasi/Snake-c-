@@ -2,7 +2,6 @@
 
 namespace net
 {
-
 	Connection::Connection()
 	{
 		m_request.setUri("/snake/index.php");
@@ -15,10 +14,10 @@ namespace net
 	{
 	}
 
-	void Connection::sendScore(Points &points, const std::string& name)
+	void Connection::sendScore(int points, const std::string& name)
 	{
 		m_reqParameters.clear();
-		m_reqParameters << "action=update" << "&uname=" << name << "&points=" << points.getMaxPoints();
+		m_reqParameters << "action=update" << "&uname=" << name << "&points=" << points;
 		m_request.setBody(m_reqParameters.str());
 		this->sendRequest();
 
@@ -32,10 +31,10 @@ namespace net
 		this->sendRequest();
 	}
 
-	void Connection::getList(std::string & name)
+	void Connection::getList()
 	{
 		m_reqParameters.clear();
-		m_reqParameters << "action=get_list&" << "uname=" << name << "&points=0";
+		m_reqParameters << "action=get_list&" << "uname=''"<< "&points=0";
 		m_request.setBody(m_reqParameters.str());
 		this->sendRequest();
 	}
@@ -56,12 +55,14 @@ namespace net
 		{
 			std::cout << "[CONNECTION STATUS]: " << m_response.getStatus() << std::endl;
 			std::cout << "[CONNECTION BODY]: " << m_response.getBody() << std::endl;
+			m_response = sf::Http::Response();
 			return true;
 		}
 		else
 		{
 			std::cout << "[CONNECTION ERROR]: " << m_response.getBody() << std::endl;
 			std::cout << "[CONNECTION ERROR]: " << m_response.getStatus() << std::endl;
+			m_response = sf::Http::Response();
 			return false;
 		}
 	}

@@ -6,6 +6,21 @@ bool isGameWindowOpen = false;
 #include "RenderHead.h"
 #include "user.h"
 #include "firstLaunch.h"
+#include "Points.h"
+
+// Creazione del bruco
+struct Snake
+{
+	int x, y;
+};
+
+int getciao(std::vector<Snake> &sn)
+{
+	int count = 0;
+	for (auto i : sn)
+		count++;
+	return count;
+}
 
 int fps = 6;
 int width = 600;
@@ -18,24 +33,20 @@ int gameMode;
 bool close, isOn = false;
 float timer = 0, delay;
 bool clearEvent = false;
-
-// Creazione del bruco
-struct Snake
-{
-	int x, y;
-}  s[900];
+std::vector<Snake> s(2);
 
 void death(Points &points, net::Connection *connect)
 {
 	fps = (gameMode == 1) ? 2 : 6;
 	num = 1;
+	s.erase(s.begin() + 2, s.end());
 	s[0].x = 0;
 	s[0].y = 0;
 	dir = 0;
 	delay = SfmlAPI::fpsAsSecs(fps);
 	points.save();
 	points.reset();
-	connect->sendScore(points, getUser());
+	connect->sendScore(points.getMaxPoints(), getUser());
 	clearEvent = true;
 	gameStatus = 0;
 }
@@ -47,6 +58,7 @@ void move(Apple &apple, Points &points, renderHead &head, net::Connection *conne
 	{
 		death(points, connect);
 	}
+
 	for (int i = num; i > 0; i--)
 	{
 		// Spostamento del bruco
@@ -79,14 +91,16 @@ void move(Apple &apple, Points &points, renderHead &head, net::Connection *conne
 		head.setPosition(static_cast<float>(s[1].x) * 20, (static_cast<float>(s[1].y) * 20) - scl);
 	}
 
+	
 	// Controllo se il bruco ha mangiato la mela e
 	// creazione della nuova mela
 	if (s[0].x == apple.getX() && s[0].y == apple.getY())
 	{
 		num++;
+		s.push_back(Snake());
+		std::cout << "vector dimension: " << sizeof(Snake) * getciao(s) + sizeof(s) << std::endl;
 		points.add(10U);
 		std::cout << points.getPoints() << std::endl;
-		std::cout << "Gamemode: " << gameMode << std::endl;
 		if (gameMode == 1 && fps <= 10)
 		{
 			fps += 1;
@@ -143,7 +157,6 @@ int snake(net::Connection *connect)
 	rectapple.setFillColor(sf::Color::Red);
 
 	// Creazione prima mela
-	std::cout << "Inizializzazione mela" << std::endl;
 	Apple apple(rectapple, dim, static_cast<int>(scl));
 	apple.changePos();
 	apple.draw(window);
@@ -206,11 +219,9 @@ int snake(net::Connection *connect)
 					switch (e.key.code)
 					{
 					case sf::Keyboard::Up:
-						std::cout << "pressed up arrow" << std::endl;
 						mainMenu.moveUp();
 						break;
 					case sf::Keyboard::Down:
-						std::cout << "pressed down arrow" << std::endl;
 						mainMenu.moveDown();
 						break;
 					case sf::Keyboard::Return:
@@ -253,7 +264,6 @@ int snake(net::Connection *connect)
 			{
 				timer = 0;
 				move(apple, points, head, connect);
-				std::cout << "Speed: " << fps << " fps" << std::endl;
 			}
 			window.clear(sf::Color::Black);
 
@@ -321,9 +331,6 @@ int snake(net::Connection *connect)
 
 		version.draw(window);
 		window.display();
-		//float currentTime = clock.restart().asSeconds();
-		//float fpsCount = 1.f / currentTime;
-		//std::cout << "fps: " << fpsCount << std::endl;
 	}
 	return 0;
 }
