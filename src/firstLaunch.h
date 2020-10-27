@@ -1,20 +1,17 @@
 #pragma once
 #include <experimental/filesystem>
 #include <filesystem>
-
-bool firstLaunch = false;
+#include "jsonParser/SavedData.h"
 
 bool isFirstLaunch()
 {
-	std::experimental::filesystem::path firstAccess(acc_confirm_file);
-	if (!std::experimental::filesystem::exists(firstAccess))
+	if (SavedData::Data::firstLaunch)
 	{
-		std::ofstream out(firstAccess);
-		out << "not first access";
-		out.close();
-		firstLaunch = true;
+		SavedData::setFirstLaunch(false);
+		return true;
 	}
-	return firstLaunch;
+	else
+		return false;
 }
 
 void createDirs()

@@ -3,14 +3,13 @@
 #include <fstream>
 #include <experimental/filesystem>
 #include <filesystem>
-#include "SfmlAPI.hpp"
+#include <SfmlAPI.hpp>
+#include "jsonParser/SavedData.h"
 
 void saveUserName(std::string name)
 {
-	std::experimental::filesystem::path userName(username_file);
-	std::ofstream out(userName, std::ios::trunc);
-	out << name;
-	out.close();
+	SavedData::setUsername(name);
+	SavedData::setFirstLaunch(false);
 }
 
 std::string getUser()

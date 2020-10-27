@@ -1,29 +1,28 @@
 #include <thread>
+#include <fstream>
+#include <iostream>
+
+#include <SfmlAPI.hpp>
+
+#include "jsonParser/SavedData.h"
 #include "net/Connection.h"
-#include "xmlParser/XmlParser.h"
-#include "SfmlAPI.hpp"
-#include "snake.h"
 #include "strings.h"
-#include <die-xml\SaxParser.h>
+#include "snake.h"
 
 
 int main()
 {
-	XmlParser as;
-	XmlParser az;
-	XmlParser ar;
+	if (!SavedData::initData())
+		std::cout << "Failed to initialize some settings" << std::endl;
+
+	std::cout << "maxScore: " << SavedData::Data::bestScore << std::endl;
 	net::Connection* connect = new net::Connection;
-
 	std::thread snake_thread(snake, connect);
-
-
 	if (isFirstLaunch())
 	{
 		std::thread user_thread(setUser);
 		user_thread.join();
 	}
-
 	snake_thread.join();
-
 	return 0;
 }

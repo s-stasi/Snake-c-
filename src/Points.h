@@ -1,10 +1,8 @@
 #pragma once
-#include <experimental/filesystem>
-#include <filesystem>
-#include <fstream>
 #include <SFML/Graphics.hpp>
-#include "SfmlAPI.hpp"
+#include <SfmlAPI.hpp>
 #include "strings.h"
+#include "jsonParser/SavedData.h"
 
 class Points
 {
@@ -26,7 +24,5 @@ public:
 
 private:
 	unsigned int							m_points;
-	std::experimental::filesystem::path		m_path;
 	sf::Text								m_text;
-	unsigned int							m_maxPoints;
 };

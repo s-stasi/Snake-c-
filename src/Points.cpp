@@ -3,27 +3,16 @@
 
 
 Points::Points(unsigned int points)
-	: m_points(points), m_path(points_file)
+	: m_points(points)
 {
-	std::ifstream maxPFile(m_path);
-	std::string str;
-	std::getline(maxPFile, str);
-	maxPFile.close();
-	m_maxPoints = static_cast<unsigned int>(std::stoi(str));
 }
 
 Points::Points(sf::Vector2f pos, const sf::Font & font, unsigned int size)
-	: m_points(0U), m_path(points_file)
+	: m_points(0U)
 {
 	m_text.setPosition(pos);
 	m_text.setFont(font);
 	m_text.setCharacterSize(size);
-	std::ifstream maxPFile(m_path);
-	std::string str;
-	std::getline(maxPFile, str);
-	maxPFile.close();
-	m_maxPoints = static_cast<unsigned int>(std::stoi(str));
-	std::cout << m_maxPoints << std::endl;
 }
 
 Points::~Points()
@@ -52,8 +41,7 @@ void Points::setCharSize(unsigned int size)
 
 void Points::save()
 {
-	std::ofstream out(m_path, std::ios::trunc);
-	out << m_points;
+	SavedData::setBestScore(m_points);
 }
 
 void Points::reset()
@@ -79,5 +67,5 @@ unsigned int Points::getPoints() const
 
 unsigned int Points::getMaxPoints() const
 {
-	return m_maxPoints;
+	return SavedData::Data::bestScore;
 }
