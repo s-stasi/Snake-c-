@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
+#include "jsonParser/SavedData.h"
 
 class Version
 {
@@ -11,7 +12,6 @@ public:
 
 	void draw(sf::RenderWindow &window);
 private:
-	sf::Font font;
 	sf::Text version;
 };
 

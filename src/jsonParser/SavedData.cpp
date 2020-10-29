@@ -6,7 +6,7 @@ bool SavedData::initData()
 	if (m_instances == 0 || m_parse == false)
 	{
 		m_instances++;
-		std::ifstream ifs(config_json);
+		std::ifstream ifs("C:/Users/" + SfmlAPI::getSystemUser() + "/AppData/Local/Snake/config.json");
 		m_builder["collectComments"] = true;
 		JSONCPP_STRING errs;
 
@@ -62,7 +62,7 @@ void SavedData::setFirstLaunch(bool firstLaunch)
 
 void SavedData::writeData()
 {
-	std::ofstream of(config_json);
+	std::ofstream of("C:/Users/" + SfmlAPI::getSystemUser() + "/AppData/Local/Snake/config.json");
 	m_obj["score"] = Data::bestScore;
 	m_obj["userName"] = Data::userName;
 	m_obj["lastMod"] = Data::lastMod;
@@ -81,12 +81,19 @@ void SavedData::fillStruct()
 	Data::lastMod = m_obj["lastMod"].asInt();
 	Data::userName = m_obj["userName"].asCString();
 	Data::firstLaunch = m_obj["firstLaunch"].asBool();
+	loadFont(m_obj["font-Arial"].asString());
+}
+
+void SavedData::loadFont(std::string path)
+{
+	Data::Arial.loadFromFile(path);
 }
 
 unsigned int SavedData::Data::bestScore;
 std::string SavedData::Data::userName = "\0";
 int SavedData::Data::lastMod;
 bool SavedData::Data::firstLaunch;
+sf::Font SavedData::Data::Arial;
 
 bool SavedData::m_parse;
 Json::Value SavedData::m_obj;

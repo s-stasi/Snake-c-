@@ -133,9 +133,6 @@ void move(Apple &apple, Points &points, renderHead &head, net::Connection *conne
 
 int snake(net::Connection *connect)
 {
-	sf::Font arial;
-	arial.loadFromFile(font_arial_file);
-
 	// Creazione fnestra
 	sf::RenderWindow window(sf::VideoMode(width, height), "Snake", sf::Style::Close | sf::Style::Titlebar);
 
@@ -172,17 +169,17 @@ int snake(net::Connection *connect)
 	mainMenu_str.push_back("Play");
 	mainMenu_str.push_back("Settings");
 	mainMenu_str.push_back("Exit");
-	SfmlAPI::Menu mainMenu(mainMenu_str, arial);
+	SfmlAPI::Menu mainMenu(mainMenu_str, SavedData::Data::Arial);
 
 	// Menu modalità
 	std::vector<std::string> modMenu_str;
 	modMenu_str.push_back("Normal mode");
 	modMenu_str.push_back("Progressive speed mode");
 	modMenu_str.push_back("Exit");
-	SfmlAPI::Menu modMenu(modMenu_str, arial);
+	SfmlAPI::Menu modMenu(modMenu_str, SavedData::Data::Arial);
 
 
-	Points points({static_cast<float>(window.getSize().x) / 2, 20.f}, arial, 20U);
+	Points points({static_cast<float>(window.getSize().x) / 2, 20.f}, SavedData::Data::Arial, 20U);
 
 	sf::Clock fpsClock;
 	float lastTime = 0;

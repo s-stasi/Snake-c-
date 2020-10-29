@@ -14,11 +14,7 @@ void saveUserName(std::string name)
 
 std::string getUser()
 {
-	std::string str;
-	std::ifstream in(username_file);
-	std::getline(in, str);
-	in.close();
-	return str;
+	return SavedData::Data::userName;
 }
 
 void setUser()
@@ -26,18 +22,16 @@ void setUser()
 	std::string name;
 
 	sf::RenderWindow setUserWindow(sf::VideoMode(200, 75), "", sf::Style::None);
-	sf::Font arial;
-	arial.loadFromFile("Font/arial.ttf");
 
 	SfmlAPI::TextBox textbox(15, sf::Color::White, true);
-	textbox.setFont(arial);
+	textbox.setFont(SavedData::Data::Arial);
 	textbox.setPosition({ 10, 40 });
 	textbox.setLimit(true, (size_t)20);
 
 	sf::Text title;
 	title.setFillColor(sf::Color::White);
 	title.setCharacterSize(15U);
-	title.setFont(arial);
+	title.setFont(SavedData::Data::Arial);
 	title.setString("Insert you username");
 	title.setPosition((setUserWindow.getSize().x / 2) - (title.getGlobalBounds().width / 2), 5);
 

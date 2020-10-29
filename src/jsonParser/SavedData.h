@@ -2,8 +2,8 @@
 #include <string>
 #include <fstream>
 #include <jsoncpp/json.h>
-
-#include "../strings.h"
+#include <SFML/Graphics/Font.hpp>
+#include <SfmlAPI.hpp>
 
 class SavedData
 {
@@ -14,6 +14,7 @@ public:
 		static std::string userName;
 		static int lastMod;
 		static bool firstLaunch;
+		static sf::Font Arial;
 	};
 public:
 	static bool initData();
@@ -26,6 +27,7 @@ public:
 private:
 	static void writeData();
 	static void fillStruct();
+	static void loadFont(std::string path);
 
 private:
 	static bool m_parse;
