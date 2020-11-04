@@ -1,28 +1,34 @@
 #include <thread>
 #include <fstream>
 #include <iostream>
+#include <SFML/OpenGL.hpp>
+#include <loguru.hpp>
 
 #include <SfmlAPI.hpp>
 
 #include "jsonParser/SavedData.h"
 #include "net/Connection.h"
 #include "strings.h"
-#include "snake.h"
+#include "gameThread.h"
 
 
 int main()
 {
-	if (!SavedData::initData())
-		std::cout << "Failed to initialize some settings" << std::endl;
+	if (SavedData::initData())
+		LOG_F(ERROR, "Initialized data");
+	else
+		LOG_F(ERROR, "Failed to initialize data");
 
-	std::cout << "maxScore: " << SavedData::Data::bestScore << std::endl;
 	net::Connection* connect = new net::Connection;
-	std::thread snake_thread(snake, connect);
+
+	std::thread main_window_thread(main_window, connect);
+
 	if (isFirstLaunch())
 	{
 		std::thread user_thread(setUser);
 		user_thread.join();
 	}
-	snake_thread.join();
+
+	main_window_thread.join();
 	return 0;
 }
