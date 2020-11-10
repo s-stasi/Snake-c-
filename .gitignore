@@ -40,8 +40,6 @@
 *.app
 
 ## VS Files
-*.vcxproj
-*.vcxproj.filters
 *.vcxproj.user
 *.lastbuildstate
 *.mfcribbon-ms
