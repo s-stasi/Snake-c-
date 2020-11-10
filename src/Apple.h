@@ -6,7 +6,7 @@
 class Apple
 {
 public:
-	Apple(sf::RectangleShape &rectangle, int dimension, int scale);
+	Apple(int dimension, int scale);
 	~Apple();
 	void changePos();
 	int getX() const;
@@ -18,5 +18,4 @@ private:
 	int x, y;
 	int dim;
 	int scl;
-	float scl_f = 20.0f;
 };

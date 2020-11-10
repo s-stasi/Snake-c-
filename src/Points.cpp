@@ -56,6 +56,7 @@ void Points::add(unsigned int p)
 
 void Points::draw(sf::RenderWindow &window)
 {
+
 	m_text.setString(std::to_string(m_points));
 	window.draw(m_text);
 }

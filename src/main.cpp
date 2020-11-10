@@ -8,6 +8,7 @@
 
 #include "jsonParser/SavedData.h"
 #include "net/Connection.h"
+#include "user.h"
 #include "strings.h"
 #include "gameThread.h"
 
@@ -15,7 +16,7 @@
 int main()
 {
 	if (SavedData::initData())
-		LOG_F(ERROR, "Initialized data");
+		LOG_F(INFO, "Initialized data");
 	else
 		LOG_F(ERROR, "Failed to initialize data");
 

@@ -1,8 +1,10 @@
 #include "Apple.h"
 
-Apple::Apple(sf::RectangleShape &rectangle, int dimension, int scale)
-	: rect(rectangle), dim(dimension), scl(scale)
+Apple::Apple(int dimension, int scale)
+	: dim(dimension), scl(scale)
 {
+	rect.setSize({ (float)scale, (float)scale });
+	rect.setFillColor(sf::Color::Red);
 	changePos();
 }
 
@@ -15,7 +17,7 @@ void Apple::changePos()
 	srand(rand());
 	x = rand() % dim;
 	y = rand() % dim;
-	rect.setPosition(x * scl_f, y * scl_f);
+	rect.setPosition(x * (float)scl, y * (float)scl);
 }
 
 int Apple::getX() const

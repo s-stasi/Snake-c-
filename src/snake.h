@@ -2,37 +2,61 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <iostream>
+#include <stdexcept>
 
 #include "Points.h"
 #include "net/connection.h"
 #include "RenderHead.h"
 #include "Apple.h"
-#include "user.h"
+#include "jsonParser/SavedData.h"
+
+typedef __int8 ultrashort_t;
 
 class Snake
 {
 public:
-	Snake();
+	Snake(sf::RenderWindow *w, net::Connection *cnn, float *del, int *gSt);
 	~Snake();
+
 	void eventDispatcher(sf::Event &e);
-	void move(Apple &apple, Points &points, renderHead &head, net::Connection *connect);
-	void draw(sf::Window &window);
-	void death(Points &points, net::Connection *connect);
+	void move();
+	void draw();
+	void death();
+	void setMode(int mode);
+	bool toDelete();
+
+public:
+	enum mode : ultrashort_t
+	{
+		normal,
+		progressive
+	};
+
+public:
+	static int fps;
+
 private:
 	struct Int2
 	{
 		int x, y;
 	};
+
+private:
+	Points* points;
+	Apple* apple;
+	renderHead* head;
+	sf::RenderWindow* window;
 	std::vector<Int2> s;
-	float scl = 20.0;
+	net::Connection* connection;
+	float scl = 20.f;
 	sf::RectangleShape rectangle;
-	int fps = 6;
 	int dim = 30;
 	int dir, num = 1;
-	float timer = 0, delay;
-	int gameStatus = 0;
+	int* gameStatus;
+	float timer = 0, *delay;
 	bool clearEvent = false;
 	bool close, isOn = false;
-	int gameMode;
+	static ultrashort_t gameMode;
+	bool isDeletable = false;
 };
 
