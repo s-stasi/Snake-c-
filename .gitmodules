@@ -1,0 +1,6 @@
+[submodule "vendor/loguru"]
+	path = vendor/loguru
+	url = https://github.com/emilk/loguru.git
+[submodule "vendor/SfmlAPI"]
+	path = vendor/SfmlAPI
+	url = https://github.com/s-stasi/SfmlAPI.git

@@ -64,3 +64,6 @@ img/heads/
 *.res
 *.aps
 *.lby
+
+!vendor/loguru
+!vendor/SfmlAPI
