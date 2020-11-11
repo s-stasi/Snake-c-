@@ -1,6 +1,0 @@
-[submodule "vendor/loguru/"]
-	path = vendor/loguru/
-	url = https://github.com/emilk/loguru.git
-[submodule "vendor/SfmlApi/"]
-	path = vendor/SfmlApi/
-	url = https://github.com/s-stasi/SfmlAPI.git
