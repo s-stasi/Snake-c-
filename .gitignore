@@ -72,3 +72,5 @@ img/heads/
 bin/*
 bin-int/*
 build/
+Release/
+Debug/
