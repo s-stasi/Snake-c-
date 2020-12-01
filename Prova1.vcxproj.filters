@@ -84,6 +84,21 @@
     <ClCompile Include="src\Snake.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="vendor\SfmlAPI\src\Button.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\SfmlAPI\src\Menu.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\SfmlAPI\src\TextBox.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\SfmlAPI\src\user.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\SfmlAPI\src\utils.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Apple.h">

@@ -75,13 +75,16 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)vendor\loguru;$(ProjectDir)vendor\SFML\include;$(SolutionDir)SfmlApi\src;$(ProjectDir)vendor\jsoncpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)vendor\loguru;$(ProjectDir)vendor\SFML\include;$(SolutionDir)vendor\SfmlApi\include;$(ProjectDir)vendor\jsoncpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(ProjectDir)vendor\SFML\lib\x86\Debug;$(ProjectDir)vendor\jsoncpp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>jsoncpp-d.lib;sfml-main-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-system-d.lib;sfml-audio-d.lib;sfml-network-d.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)vendor\sfml\lib\msvc\x86;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-main-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-system-d.lib;sfml-audio-d.lib;sfml-network-d.lib;opengl32.lib;</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalOptions />
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -148,11 +151,6 @@
     <None Include="vendor\temp\arabica\vs2013+\Arabica.sln" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SfmlAPI\SfmlAPI.vcxproj">
-      <Project>{4fa932be-f68f-4d56-b4a1-9aa9563ac907}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="img\heads\red.bmp" />
     <Image Include="img\icon.bmp" />
   </ItemGroup>
@@ -174,6 +172,11 @@
     <ClCompile Include="src\Snake.cpp" />
     <ClCompile Include="src\Version.cpp" />
     <ClCompile Include="vendor\loguru\loguru.cpp" />
+    <ClCompile Include="vendor\SfmlAPI\src\Button.cpp" />
+    <ClCompile Include="vendor\SfmlAPI\src\Menu.cpp" />
+    <ClCompile Include="vendor\SfmlAPI\src\TextBox.cpp" />
+    <ClCompile Include="vendor\SfmlAPI\src\user.cpp" />
+    <ClCompile Include="vendor\SfmlAPI\src\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\gameThread.h" />

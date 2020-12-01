@@ -1,6 +1,9 @@
-[submodule "vendor/loguru"]
-	path = vendor/loguru
-	url = https://github.com/emilk/loguru.git
-[submodule "vendor/SfmlAPI"]
-	path = vendor/SfmlAPI
+[submodule "Snake-c-\\vendor\\loguru"]
+	path = Snake-c-\\vendor\\loguru
+	url = https://github.com/s-stasi/loguru.git
+[submodule "Snake-c-\\vendor\\jsoncpp"]
+	path = Snake-c-\\vendor\\jsoncpp
+	url = https://github.com/s-stasi/jsoncpp.git
+[submodule "Snake-c-\\vendor\\SfmlAPI"]
+	path = Snake-c-\\vendor\\SfmlAPI
 	url = https://github.com/s-stasi/SfmlAPI.git
