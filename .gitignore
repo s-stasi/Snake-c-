@@ -69,5 +69,5 @@ img/heads/
 *.lby
 
 ## Build
-bin
-bin-int
+bin/
+bin-int/
