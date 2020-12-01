@@ -40,10 +40,13 @@
 *.app
 
 ## VS Files
+*.sln
+*.vcxproj
 *.vcxproj.user
 *.lastbuildstate
 *.mfcribbon-ms
 *.lby~
+.vs
 
 ## Archives
 *.zip
@@ -65,5 +68,6 @@ img/heads/
 *.aps
 *.lby
 
-!vendor/loguru
-!vendor/SfmlAPI
+## Build
+bin
+bin-int
