@@ -71,3 +71,4 @@ img/heads/
 ## Build
 bin/*
 bin-int/*
+build/
