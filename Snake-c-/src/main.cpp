@@ -15,20 +15,16 @@
 
 int main()
 {
-	if (SavedData::initData())
-		LOG_F(INFO, "Initialized data");
-	else
-		LOG_F(ERROR, "Failed to initialize data");
+	while(!SavedData::initData()) {
+		LOG_F(WARNING, "Initializing app data");
+		std::thread initThread(initializeGame);
+		initThread.join();
+	}
 
 	net::Connection* connect = new net::Connection;
 
 	std::thread main_window_thread(main_window, connect);
-
-	if (isFirstLaunch())
-	{
-		std::thread user_thread(setUser);
-		user_thread.join();
-	}
+	LOG_F(INFO, "Hehehehehehehehehehehehehe");
 
 	main_window_thread.join();
 	return 0;

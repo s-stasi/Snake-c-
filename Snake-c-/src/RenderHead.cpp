@@ -1,7 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <fstream>
 #include <string>
-#include <experimental/filesystem>
 #include <filesystem>
 #include <SfmlAPI.hpp>
 #include "RenderHead.h"
@@ -17,8 +16,8 @@ renderHead::renderHead(const sf::Color color, std::string colName)
 	
 	m_path = head_dir;
 	m_path += colName + ".bmp";
-	std::experimental::filesystem::path controlPath(m_path);
-	if (!std::experimental::filesystem::exists(controlPath))
+	std::filesystem::path controlPath(m_path);
+	if (!std::filesystem::exists(controlPath))
 	{
 		createImage();
 		saveImage();

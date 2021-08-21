@@ -1,5 +1,4 @@
 #pragma once
-#include <experimental/filesystem>
 #include <filesystem>
 #include "jsonParser/SavedData.h"
 
@@ -16,5 +15,5 @@ bool isFirstLaunch()
 
 void createDirs()
 {
-	std::experimental::filesystem::create_directories(head_dir);
+	std::filesystem::create_directories(head_dir);
 }

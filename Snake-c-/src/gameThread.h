@@ -13,6 +13,7 @@ static bool isGameWindowOpen = false;
 #include "Points.h"
 #include "Snake.h"
 
+
 int width = 600;
 int height = 600;
 int dim = 30;

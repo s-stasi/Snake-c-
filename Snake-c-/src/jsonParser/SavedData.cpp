@@ -3,30 +3,24 @@
 
 bool SavedData::initData()
 {
-	if (m_instances == 0 || m_parse == false)
-	{
-		m_instances++;
-		std::ifstream ifs("C:/Users/" + SfmlAPI::getSystemUser() + "/AppData/Local/Snake/config.json");
-		m_builder["collectComments"] = true;
-		JSONCPP_STRING errs;
+	//if (m_instances != 0 || m_parse == true) return false;
+	m_instances++;
+	std::ifstream ifs("C:/Users/" + SfmlAPI::getSystemUser() + "/AppData/Local/Snake/config.json");
+	m_builder["collectComments"] = true;
+	JSONCPP_STRING errs;
 
-		if (!parseFromStream(m_builder, ifs, &m_obj, &errs)) {
-			std::cout << errs << std::endl;
-			ifs.close();
-			m_parse = false;
-			return m_parse;
-		}
-		else
-		{
-			ifs.close();
-			fillStruct();
-			m_parse = true;
-			return m_parse;
-		}
+	if (!parseFromStream(m_builder, ifs, &m_obj, &errs)) {
+		std::cout << errs << std::endl;
+		ifs.close();
+		m_parse = false;
+		return m_parse;
 	}
 	else
 	{
-		m_instances++;
+		ifs.close();
+		fillStruct();
+		writeData();
+		m_parse = true;
 		return m_parse;
 	}
 }
@@ -86,7 +80,7 @@ void SavedData::fillStruct()
 
 void SavedData::loadFont(std::string path)
 {
-	Data::Arial.loadFromFile(path);
+	//Data::Arial.loadFromFile(path);
 }
 
 unsigned int SavedData::Data::bestScore;
